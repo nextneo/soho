@@ -1,6 +1,6 @@
 <template>
   <CRow>
-    <CCol col="12" lg="6">
+    <CCol col="12">
       <CCard no-header>
         <CCardBody>
           <h3>
@@ -64,8 +64,8 @@
               <br>
               <CInput type="text" placeholder="CoreUI Icon class - example: cil-bell" v-model="menuelement.icon"></CInput>
             </div>
-          <CButton color="primary" @click="store()">Create</CButton>
-          <CButton color="primary" @click="goBack">Back</CButton>
+          <CButton color="info" @click="store()">Create</CButton>
+          <CButton color="secondary ml-2" @click="goBack">Back</CButton>
         </CCardBody>
       </CCard>
     </CCol>

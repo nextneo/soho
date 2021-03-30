@@ -1,6 +1,6 @@
 <template>
   <CRow>
-    <CCol col="12" lg="6">
+    <CCol col="12">
       <CCard no-header>
         <CCardBody>
           <CForm>
@@ -16,8 +16,8 @@
             </CAlert>
             <CInput type="text" label="Name" placeholder="Name" v-model="name"></CInput>
             <CInput type="text" label="Email" placeholder="Email" v-model="email"></CInput>
-            <CButton color="primary" @click="update()">Save</CButton>
-            <CButton color="primary" @click="goBack">Back</CButton>
+            <CButton color="info" @click="update()">Save</CButton>
+            <CButton color="secondary ml-2" @click="goBack">Back</CButton>
           </CForm>
         </CCardBody>
       </CCard>

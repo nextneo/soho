@@ -1,6 +1,6 @@
 <template>
   <CRow>
-    <CCol col="12" lg="6">
+    <CCol col="12">
       <CCard>
         <CCardHeader>
           User id:  {{ $route.params.id }}
@@ -14,12 +14,12 @@
             :fields="fields"
           >
             <template slot="value" slot-scope="data">
-              <strong>{{data.item.value}}</strong>
+              <td>{{data.item.value}}</td>              
             </template>
           </CDataTable>  
         </CCardBody>
         <CCardFooter>
-          <CButton color="primary" @click="goBack">Back</CButton>
+          <CButton color="secondary" @click="goBack">Back</CButton>
         </CCardFooter>
       </CCard>
     </CCol>
