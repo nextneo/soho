@@ -1,843 +1,398 @@
-# [Vue Material Dashboard Laravel](https://vue-material-dashboard-laravel.creative-tim.com/?ref=mdpl-readme) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/home?status=Vue%20Material%20Dashboard%20Laravel%E2%9D%A4%EF%B8%8F%0Ahttps%3A//vue-material-dashboard-laravel.creative-tim.com/%20%23%vue%20%23%material%20%23design%20%23dashboard%20%23laravel%20via%20%40CreativeTim)
+# CoreUI Free Vue Laravel Bootstrap Admin Template [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=CoreUI%20-%20Free%20Bootstrap%204%20Admin%20Template%20&url=https://coreui.io&hashtags=bootstrap,admin,template,dashboard,panel,free,angular,react,vue)
 
-![version](https://img.shields.io/badge/version-1.0.0-blue.svg) ![license](https://img.shields.io/badge/license-MIT-blue.svg) [![GitHub issues open](https://img.shields.io/github/issues/creativetimofficial/vue-material-dashboard-laravel.svg?maxAge=2592000)](https://github.com/creativetimofficial/vue-material-dashboard-laravel/issues?q=is%3Aopen+is%3Aissue) [![GitHub issues closed](https://img.shields.io/github/issues-closed-raw/creativetimofficial/vue-material-dashboard-laravel/vue-material-dashboard-laravel.svg?maxAge=2592000)](https://github.com/creativetimofficial/vue-material-dashboard-laravel/issues?q=is%3Aissue+is%3Aclosed)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-*Frontend version*: Material Dashboard v2.1.2. More info at https://www.creative-tim.com/product/material-dashboard
+[![Bootstrap Admin Template](https://coreui.io/images/github/vue-free-template-3.gif)](https://coreui.io/vue-laravel/)
 
-*Vue version*: Vue Material Dashboard v1.4.0. More info at https://www.creative-tim.com/product/vue-material-dashboard
+Curious why I decided to create CoreUI? Please read this article: [Jack of all trades, master of none. Why Bootstrap Admin Templates suck.](https://medium.com/@lukaszholeczek/jack-of-all-trades-master-of-none-5ea53ef8a1f#.7eqx1bcd8)
 
-![Product Image](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/vue-material-dashboard-laravel.gif?raw=true)
+CoreUI offers 6 versions: [Bootstrap](https://github.com/coreui/coreui-free-bootstrap-admin-template), [Angular](https://github.com/coreui/coreui-free-angular-admin-template), [Laravel](https://github.com/coreui/coreui-free-laravel-admin-template), [React.js](https://github.com/coreui/coreui-free-react-admin-template), [Vue.js](https://github.com/coreui/coreui-free-vue-admin-template), and [Vue.js + Laravel](https://github.com/coreui/coreui-free-vue-laravel-admin-template).
 
-What if your frontend came not only with reusable components, but also with a reusable backend? API-driven development is more than just a buzzword and we partnered with [UPDIVISION](https://updivision.com) to prove it. Build awesome-looking apps with a flexible architecture across a variety of devices and operating systems with Vue Material Dashboard Laravel. 
-
-# Download
-
-For the free version of the project you can either
-- download the .zip file from the Creative Tim site and extract it or 
-- make a clone from the Github repository
-
-You will get two project folders: one for the Laravel API project and one for the Vue frontend.
-
-# Laravel API Setup
-
-## Introduction
-
-JSON:API is a specification for how a client should request that resources be fetched or modified, and how a server should respond to those requests. It is designed to minimize both the number of requests and the amount of data transmitted between clients and servers. This efficiency is achieved without compromising readability, flexibility, or discoverability.
-
-[Click here to go to the JSON:API docs](https://explore.postman.com/api/6357/laravel-jsonapi)
-
-## Prerequisites
-
-The Laravel JSON:API backend project requires a working Apache/Nginx local environment with PHP, Composer and MySQL.
-
-The Laravel JSON:API frontend project requires a working local environment with NodeJS version 8.9 or above (8.11.0+ recommended), npm, VueCLI.
-
-If you don't already have a local development environment, use one of the following links:
-
-- Windows: [How to install WAMP on Windows](https://updivision.com/blog/post/beginner-s-guide-to-setting-up-your-local-development-environment-on-windows)
-- Linux: [How to install LAMP on Linux](https://howtoubuntu.org/how-to-install-lamp-on-ubuntu)
-- Mac: [How to install MAMP on MAC](https://wpshout.com/quick-guides/how-to-install-mamp-on-your-mac/)
-- Install Composer: [https://getcomposer.org/doc/00-intro.md](https://getcomposer.org/doc/00-intro.md)
-
-Install Composer: https://getcomposer.org/doc/00-intro.md
-
-Install Node: https://nodejs.org/ (version 8.11.0+ recommended)
-
-Install NPM: https://www.npmjs.com/get-npm
-
-Install VueCLI: https://cli.vuejs.org/guide/installation.html
-
-## Laravel JSON:API Project Installation
-
-1. Navigate in your Laravel API project folder: `cd your-laravel-json-api-project`
-2. Install project dependencies: `composer install`
-3. Create a new .env file: `cp .env.example .env`
-3. Add your own database credentials in the .env file in DB_DATABASE, DB_USERNAME, DB_PASSWORD
-5. Create users table: `php artisan migrate --seed`
-6. Generate application key: `php artisan key:generate`
-7. Install Laravel Passport: `php artisan passport:install`
-8. Add your own mailtrap.io credentials in MAIL_USERNAME and MAIL_PASSWORD in the .env file
-
-## Vue Material Dashboard Project Installation
-
-1. Navigate to your Vue Dashboard project folder:  `cd your-vue-material-dashbord-project`
-2. Install project dependencies: `npm install`
-3. Create a new .env file: `cp .env.example .env`
-4. `VUE_APP_APP_BASE_URL` should contain the URL of your Vue Material Dashboard Project (eg. http://localhost:8080/)
-5. `VUE_APP_API_BASE_URL` should contain the URL of your Laravel JSON:API Project. (eg. http://localhost:3000/api/v1)
-6. Run `npm run dev` to start the application in a local development environment or `npm run build`  to build release distributables.
-
-
-## Element-UI
-
-Vue Material Dashboard json API also uses [element-ui](https://vuematerial.io/ui-elements/elevation) components, restyled to fit perfectly with the existing Material look & feel.
-
-## Usage
-
-Register a user or login using admin@jsonapi.com and secret and start testing the theme.
-
-Besides the dashboard and the auth pages this theme also has an edit profile page. All the necessary files are installed out of the box and all the needed routes are added to `src\router\index.js`. Keep in mind that all the features can be viewed once you log in using the credentials provided above or by registering your own user.
-
-### Dashboard
-
-You can access the dashboard either by using the "**Dashboards/Dashboard**" link in the left sidebar or by adding **/home** in the URL.
-
-### Login
-
-The login functionality is fully implemented in our theme helping you to start your project in no time. To login into dashboard you just have to add **/login** in the URL and fill the login form with the credentials (user: **admin@jsonapi.com** and password: **secret**).
-
-The `src\pages\Dashboard\Pages\Login.vue` is the Vue component which handles the login functinality. You can easily adapt it to your needs.
-
-It uses the auth store located in `src\store\modules\auth.js`.
-
-#### Login card
-```
-<login-card header-color="green">
-  <h4 slot="title" class="title">Log in</h4>
-  <md-button slot="buttons" ref="#facebook" class="md-just-icon md-simple md-white">
-    <i class="fab fa-facebook-square"></i>
-  </md-button> 
-  <md-button slot="buttons" href="#twitter" class="md-just-icon md-simple md-white">
-    <i class="fab fa-twitter"></i>
-  </md-button>
-  <md-button slot="buttons" href="#google" class="md-just-icon md-simple md-white">
-    <i class="fab fa-google-plus-g"></i>
-  </md-button>
-  <p slot="description" class="description">Or Be Classical</p>
-  <md-field class="form-group md-invalid" slot="inputs" style="margin-bottom: 28px">
-    <md-icon>email</md-icon>
-    <label>Email...</label>
-    <md-input v-model="email" type="email"/>
-    <validation-error :errors="apiValidationErrors.email"/>
-  </md-field>
-  <md-field class="form-group md-invalid" slot="inputs">
-    <md-icon>lock_outline</md-icon>
-    <label>Password...</label>
-    <md-input v-model="password" type="password"/>
-  </md-field>
-  <md-button slot="footer" @click="login" class="md-simple md-success md-lg">
-    Lets Go
-  </md-button>
-</login-card>
-```
-
-### Register
-
-The register functionality is fully implemented in our theme helping you to start your project in no time. To register a new user you just have to add **/register** in the URL or click on register link from login page and fill the register form with user details.
-
-The `src\pages\Dashboard\Pages\Register.vue` is the Vue component which handles the login functinality. You can easily extend it to your needs.
-
-It uses the auth store located in `src\store\modules\auth.js`.
-
-#### Register card
-```
-<signup-card>
-    <h2 class="title text-center" slot="title">Register</h2>
-    <div
-        class="md-layout-item md-size-50 md-medium-size-50 md-small-size-100 ml-auto"
-        slot="content-left"
-    >
-        <div
-        class="info info-horizontal"
-        v-for="item in contentLeft"
-        :key="item.title"
-        >
-        <div :class="`icon ${item.colorIcon}`">
-            <md-icon>{{ item.icon }}</md-icon>
-        </div>
-        <div class="description">
-            <h4 class="info-title">{{ item.title }}</h4>
-            <p class="description">
-            {{ item.description }}
-            </p>
-        </div>
-        </div>
-    </div>
-    <div
-        class="md-layout-item md-size-50 md-medium-size-50 md-small-size-100 mr-auto"
-        slot="content-right"
-    >
-        <div class="social-line text-center">
-        <md-button class="md-just-icon md-round md-twitter">
-            <i class="fab fa-twitter"></i>
-        </md-button>
-        <md-button class="md-just-icon md-round md-dribbble">
-            <i class="fab fa-dribbble"></i>
-        </md-button>
-        <md-button class="md-just-icon md-round md-facebook">
-            <i class="fab fa-facebook-f"></i>
-        </md-button>
-        <h4 class="mt-3">or be classical</h4>
-        </div>
-
-        <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
-        <md-icon>face</md-icon>
-        <label>Name</label>
-        <md-input v-model="name"/>
-        <validation-error :errors="apiValidationErrors.name"/>
-        </md-field>
-
-        <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
-        <md-icon>email</md-icon>
-        <label>Email</label>
-        <md-input v-model="email"/>
-        <validation-error :errors="apiValidationErrors.email"/>
-        </md-field>
-
-        <md-field class="md-form-group md-invalid" style="margin-bottom: 2rem">
-        <md-icon>lock_outline</md-icon>
-        <label>Password</label>
-        <md-input v-model="password" type="password"/>
-        <validation-error :errors="apiValidationErrors.password"/>
-        </md-field>
-
-        <md-field class="md-form-group md-invalid">
-        <md-icon>lock_outline</md-icon>
-        <label>Confirm Password</label>
-        <md-input v-model="password_confirmation" type="password"/>
-        <validation-error :errors="apiValidationErrors.password_confirmation"/>
-        </md-field>
-
-        <md-checkbox v-model="boolean">I agree to the <a>terms and conditions</a>.</md-checkbox>
-
-        <div class="button-container">
-        <md-button class="md-success md-round mt-4" @click="register" slot="footer">
-            Get Started
-        </md-button>
-        </div>
-
-    </div>
-</signup-card>
-```
-
-### Profile edit
-
-You have the option to edit the current logged in user's profile information (name, email, profile picture) and password. To access this page, just click the "**Examples/Profile**" link in the left sidebar or add **/profile** in the URL.
-
-The `src\pages\Dashboard\Examples\UserProfile` is the folder with Vue components that handle the update of the user information and password.
-
-#### Edit profile component
-```
-<template>
-  <form>
-    <md-card>
-
-      <md-card-header class="md-card-header-icon">
-        <div class="card-icon">
-          <md-icon>perm_identity</md-icon>
-        </div>
-        <h4 class="title">
-          Edit Profile
-        </h4>
-      </md-card-header>
-
-      <md-card-content>
-        <div class="md-layout">
-          <label class="md-layout-item md-size-15 md-form-label">
-            Profile Photo
-          </label>
-          <div class="md-layout-item">
-            <div class="file-input">
-              <div v-if="avatar_img">
-                <div class="image-container">
-                  <img :src="avatar_img"/>
-                </div>
-              </div>
-              <div class="image-container" v-else>
-                <img :src="default_img"/>
-              </div>
-              <div class="button-container">
-                <md-button class="md-danger md-round" @click="removeImage" v-if="avatar_img">
-                  <i class="fa fa-times"/>
-                  Remove
-                </md-button>
-                <md-button class="md-success md-fileinput">
-                  <template v-if="!avatar_img">Select image</template>
-                  <template v-else>Change</template>
-                  <input type="file" @change="onFileChange"/>
-                </md-button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="md-layout">
-          <label class="md-layout-item md-size-15 md-form-label">
-            Name
-          </label>
-          <div class="md-layout-item">
-            <md-field class="md-invalid">
-              <md-input v-model="user.name"/>
-              <validation-error :errors="apiValidationErrors.name"/>
-            </md-field>
-          </div>
-        </div>
-
-        <div class="md-layout">
-          <label class="md-layout-item md-size-15 md-form-label">
-            Email
-          </label>
-          <div class="md-layout-item">
-            <md-field class="md-invalid">
-              <md-input v-model="user.email"/>
-              <validation-error :errors="apiValidationErrors.email"/>
-            </md-field>
-          </div>
-        </div>
-
-      </md-card-content>
-
-      <md-card-actions>
-        <md-button @click="updateProfile()">
-          Update Profile
-        </md-button>
-      </md-card-actions>
-
-    </md-card>
-  </form>
-</template>
-<script>
-  import {ValidationError} from "@/components";
-  import formMixin from "@/mixins/form-mixin";
-
-  export default {
-    name: "edit-profile-card",
-
-    props: {
-      user: Object
-    },
-
-    components: {ValidationError},
-
-    mixins: [formMixin],
-
-    data() {
-      return {
-        avatar_img: null,
-        default_img: process.env.VUE_APP_APP_BASE_URL + "/img/placeholder.jpg",
-        file: null
-      }
-    },
-
-    methods: {
-
-      onFileChange(e) {
-        let files = e.target.files || e.dataTransfer.files;
-        if (!files.length) return;
-        this.createImage(files[0]);
-      },
-
-      createImage(file) {
-        let reader = new FileReader();
-        reader.onload = e => {
-          this.avatar_img = e.target.result;
-          this.file = file;
-        }
-        reader.readAsDataURL(file);
-      },
-
-      removeImage() {
-        this.avatar_img = null;
-      },
-
-      async updateProfile() {
-        try {
-          if (!this.user.profile_image) {
-            await this.$store.dispatch("users/upload", {user: this.user, image: this.file})
-            this.user.profile_image = await this.$store.getters["profile/url"]
-          }
-          await this.$store.dispatch("profile/update", this.user)
-          await this.$store.dispatch("alerts/success", "Profile updated successfully.")
-          this.user = await this.$store.getters["profile/me"]
-        } catch (e) {
-          await this.$store.dispatch("alerts/error", "Oops, something went wrong!")
-          this.setApiValidation(e.response.data.errors)
-        }
-
-      }
-
-    }
-  };
-</script>
-```
-
-#### Edit password component
-
-```
-<template>
-  <form ref="password_form">
-
-    <md-card>
-
-      <md-card-header class="md-card-header-icon">
-        <div class="card-icon">
-          <md-icon>perm_identity</md-icon>
-        </div>
-        <h4 class="title">
-          Change Password
-        </h4>
-      </md-card-header>
-
-      <md-card-content>
-        <div class="md-layout">
-          <div class="md-layout-item md-size-100">
-            <md-field class="md-invalid">
-              <label>Current Password</label>
-              <md-input v-model="password" type="password"/>
-              <validation-error :errors="apiValidationErrors.password"/>
-            </md-field>
-            <md-field class="md-invalid">
-              <label>New Password</label>
-              <md-input v-model="new_password" type="password"/>
-              <validation-error :errors="apiValidationErrors.password_confirmation"/>
-            </md-field>
-            <md-field class="md-invalid">
-              <label>Confirm New Password</label>
-              <md-input v-model="confirm_password" type="password"/>
-              <validation-error :errors="apiValidationErrors.password_confirmation"/>
-            </md-field>
-          </div>
-        </div>
-      </md-card-content>
-
-      <md-card-actions>
-        <md-button @click="changePassword()">
-          Change Password
-        </md-button>
-      </md-card-actions>
-    </md-card>
-
-  </form>
-</template>
-
-<script>
-  import {ValidationError} from "@/components";
-  import formMixin from "@/mixins/form-mixin";
-  export default {
-    name: "edit-password-card",
-
-    props: {
-      user: Object
-    },
-
-    components: {ValidationError},
-
-    mixins: [formMixin],
-
-    data: () => ({
-      password: null,
-      new_password: null,
-      confirm_password: null
-    }),
-
-    methods: {
-      async changePassword() {
-
-        this.user.password = this.password;
-        this.user.password_new = this.new_password;
-        this.user.password_confirmation = this.confirm_password;
-
-        try {
-          await this.$store.dispatch("users/update", this.user)
-          await this.$store.dispatch("alerts/error", "Password changed successfully.")
-          this.user = await this.$store.getters["profile/me"]
-          this.$refs['password_form'].reset()
-        } catch (e) {
-          await this.$store.dispatch("alerts/error", "Oops, something went wrong!")
-          this.setApiValidation(e.response.data.errors)
-        }
-
-      }
-    }
-  };
-</script>
-```
+CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
 
 ## Table of Contents
 
 * [Versions](#versions)
-* [Demo](#demo)
-* [Documentation](#documentation)
-* [File Structure](#file-structure)
-* [Browser Support](#browser-support)
-* [Resources](#resources)
-* [Reporting Issues](#reporting-issues)
-* [Licensing](#licensing)
-* [Useful Links](#useful-links)
+* [CoreUI Pro](#coreui-pro)
+* [Admin Templates built on top of CoreUI Pro](#admin-templates-built-on-top-of-coreui-pro)
+* [Installation](#installation)
+* [Usage](#Usage)
+* [Features](#Features)
+* [Creators](#creators)
+* [Community](#community)
+* [Community Projects](#community-projects)
+* [License](#license)
+* [Support CoreUI Development](#support-coreui-development)
 
 ## Versions
 
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/html-logo.jpg" height="80" />](#)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/laravel_logo.png" height="80" />](#)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/vue.jpg" height="80" />](#)
-[<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/json-api.png" height="75" />](#)
+CoreUI is built on top of Bootstrap 4 and supports popular frameworks.
 
-| HTML | Laravel |
-| --- | --- |
-| [![Material Dashboard HTML](https://s3.amazonaws.com/creativetim_bucket/products/50/thumb/opt_md_thumbnail.jpg)](https://demos.creative-tim.com/material-dashboard/examples/dashboard.html?ref=vmdl-readme) | [![Material Dashboard Laravel](https://s3.amazonaws.com/creativetim_bucket/products/154/thumb/opt_md_laravel_thumbnail.jpg)](https://material-dashboard-laravel.creative-tim.com/?ref=vmdl-readme) |
+* [CoreUI Free Bootstrap Admin Template](https://github.com/coreui/coreui-free-bootstrap-admin-template)
+* [CoreUI Free Angular Admin Template](https://github.com/coreui/coreui-free-angular-admin-template)
+* [CoreUI Free Laravel Admin Template](https://github.com/coreui/coreui-free-laravel-admin-template)
+* [CoreUI Free React.js Admin Template](https://github.com/coreui/coreui-free-react-admin-template)
+* [CoreUI Free Vue.js Admin Template](https://github.com/coreui/coreui-free-vue-admin-template)
+* [CoreUI Free Vue.js + Laravel Admin Template](https://github.com/coreui/coreui-free-vue-laravel-admin-template)
 
-| Vue | Vue & Laravel |
-| --- | --- |
-| [![Vue Material Dashboard](https://s3.amazonaws.com/creativetim_bucket/products/81/thumb/opt_md_vue_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard?ref=vmdl-readme) | [![Vue Material Dashboard Laravel](https://s3.amazonaws.com/creativetim_bucket/products/331/thumb/opt_md_vuelaravel_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard-laravel?ref=vmdl-readme) |
+## CoreUI Pro
 
-## Demo
+* 💪  [CoreUI Pro Bootstrap Admin Template](https://coreui.io/pro/)
+* 💪  [CoreUI Pro Angular Admin Template](https://coreui.io/pro/angular)
+* 💪  [CoreUI Pro Laravel Admin Template](https://coreui.io/pro/laravel)
+* 💪  [CoreUI Pro React Admin Template](https://coreui.io/pro/react)
+* 💪  [CoreUI Pro Vue Admin Template](https://coreui.io/pro/vue)
+* 💪  [CoreUI Pro Vue + Laravel Admin Template](https://coreui.io/pro/vue-laravel)
 
-| Register | Login | Dashboard |
-| --- | --- | ---  |
-| [![Register](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Register.png)](https://vue-material-dashboard-laravel.creative-tim.com/register?ref=vmdl-readme)  | [![Login](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Login.png)](https://vue-material-dashboard-laravel.creative-tim.com/login?ref=vmdl-readme)  | [![Dashboard](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Dashboard.png)](https://vue-material-dashboard-laravel.creative-tim.com/?ref=vmdl-readme) |
+## Admin Templates built on top of CoreUI Pro
 
-| Profile Page | Users Page | Tables Page  |
-| --- | --- | ---  |
-| [![Profile Page](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Profile.png)](https://vue-material-dashboard-laravel.creative-tim.com/profile?ref=vmdl-readme)  | [![Users Page](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Users.png)](https://vue-material-dashboard-laravel.creative-tim.com/user?ref=vmdl-readme) | [![Tables Page](https://github.com/creativetimofficial/public-assets/raw/master/vue-material-dashboard-laravel/Tables.png)](https://vue-material-dashboard-laravel.creative-tim.com/table-list?ref=vmdl-readme)
-[View More](https://vue-material-dashboard-laravel.creative-tim.com/?ref=vmdl-readme)
+| Default Theme | Legacy Theme | Dark Layout |
+| --- | --- | --- |
+| [![CoreUI Pro Bootstrap Admin Template](https://coreui.io/images/mockups/mockup_3_1_default.png)](https://coreui.io/pro/vue-laravel/) | [![CoreUI Pro Bootstrap Admin Template](https://coreui.io/images/mockups/mockup_3_1_legacy.png)](https://coreui.io/pro/vue-laravel/)| [![CoreUI Pro Bootstrap Admin Template](https://coreui.io/images/mockups/mockup_3_1_dark.png)](https://coreui.io/pro/vue-laravel/)
 
-## Documentation
-The documentation for the Vue Material Dashboard Laravel is hosted at our [website](https://vue-material-dashboard-laravel.creative-tim.com/documentation?ref=vmdl-readme).
+## Installation
 
-## File Structure
-```
-|   .browserslistrc
-|   .eslintrc.js
-|   .gitignore
-|   .jshintrc
-|   babel.config.js
-|   CHANGELOG.md
-|   package-lock.json
-|   package.json
-|   postcss.config.js
-|   README.md
-|   yarn.lock
-|
-+---public
-|   |   .DS_Store
-|   |   favicon.png
-|   |   index.html
-|   |
-|   \---img
-|       |   apple-icon.png
-|       |   bg-pricing.jpg
-|       |   bg3.jpg
-|       |   bg9.jpg
-|       |   card-1.jpg
-|       |   card-2.jpg
-|       |   card-3.jpg
-|       |   default-avatar.png
-|       |   favicon.png
-|       |   image_placeholder.jpg
-|       |   laravel-vue.svg
-|       |   lock.jpg
-|       |   login.jpg
-|       |   mask.png
-|       |   new_logo.png
-|       |   placeholder.jpg
-|       |   product1.jpg
-|       |   product2.jpg
-|       |   product3.jpg
-|       |   register.jpg
-|       |   sidebar-1.jpg
-|       |   sidebar-2.jpg
-|       |   sidebar-3.jpg
-|       |   sidebar-4.jpg
-|       |   vue-logo.png
-|       |
-|       \---faces
-|               avatar.jpg
-|               card-profile1-square.jpg
-|               card-profile2-square.jpg
-|               marc.jpg
-|
-\---src
-    |   .DS_Store
-    |   App.vue
-    |   globalComponents.js
-    |   globalDirectives.js
-    |   main.js
-    |   material-dashboard.js
-    |
-    +---assets
-    |   |   .DS_Store
-    |   |
-    |   +---css
-    |   |       demo.css
-    |   |
-    |   +---images
-    |   |       avatar.jpg
-    |   |
-    |   \---scss
-    |       |   .DS_Store
-    |       |   material-dashboard.scss
-    |       |
-    |       \---md
-    |           |   .DS_Store
-    |           |   _alerts.scss
-    |           |   _autocomplete.scss
-    |           |   _badges.scss
-    |           |   _buttons.scss
-    |           |   _cards.scss
-    |           |   _chartist.scss
-    |           |   _checkboxes.scss
-    |           |   _collapse.scss
-    |           |   _colors.scss
-    |           |   _dialogs.scss
-    |           |   _dropdown.scss
-    |           |   _fileinput.scss
-    |           |   _fixed-plugin.scss
-    |           |   _footers.scss
-    |           |   _forms.scss
-    |           |   _headers.scss
-    |           |   _info-areas.scss
-    |           |   _inputs-size.scss
-    |           |   _inputs.scss
-    |           |   _layout.scss
-    |           |   _misc.scss
-    |           |   _mixins.scss
-    |           |   _navbars.scss
-    |           |   _pages.scss
-    |           |   _pagination.scss
-    |           |   _pills.scss
-    |           |   _popups.scss
-    |           |   _progress.scss
-    |           |   _radios.scss
-    |           |   _responsive.scss
-    |           |   _rtl.scss
-    |           |   _select.scss
-    |           |   _shadows.scss
-    |           |   _sidebar-and-main-panel.scss
-    |           |   _tables.scss
-    |           |   _tabs.scss
-    |           |   _tags.scss
-    |           |   _timeline.scss
-    |           |   _togglebutton.scss
-    |           |   _typography.scss
-    |           |   _variables.scss
-    |           |
-    |           +---cards
-    |           |       _card-global-sales.scss
-    |           |       _card-login.scss
-    |           |       _card-pricing.scss
-    |           |       _card-product.scss
-    |           |       _card-profile.scss
-    |           |       _card-signup.scss
-    |           |       _card-tabs.scss
-    |           |       _card-testimonials.scss
-    |           |
-    |           +---mixins
-    |           |       _chartist.scss
-    |           |       _sidebar.scss
-    |           |       _transparency.scss
-    |           |       _vendor-prefixes.scss
-    |           |
-    |           \---plugins
-    |                   _animate.scss
-    |                   _fullcalendar.scss
-    |                   _md-datepicker.scss
-    |                   _perfect-scrollbar.scss
-    |                   _plugin-jquery.jvectormap.scss
-    |                   _plugin-nouislider.scss
-    |                   _sweetalert2.scss
-    |                   _wizard-card.scss
-    |
-    +---axios
-    |       index.js
-    |
-    +---components
-    |   |   .DS_Store
-    |   |   Badge.vue
-    |   |   Dropdown.vue
-    |   |   index.js
-    |   |   Logout.vue
-    |   |   Pagination.vue
-    |   |   Slider.vue
-    |   |   Tabs.vue
-    |   |   ValidationError.vue
-    |   |
-    |   +---Cards
-    |   |       ChartCard.vue
-    |   |       LoginCard.vue
-    |   |       NavTabsCard.vue
-    |   |       SignupCard.vue
-    |   |       StatsCard.vue
-    |   |
-    |   +---NotificationPlugin
-    |   |       index.js
-    |   |       Notification.vue
-    |   |       Notifications.vue
-    |   |
-    |   +---SidebarPlugin
-    |   |       index.js
-    |   |       SideBar.vue
-    |   |       SidebarItem.vue
-    |   |
-    |   \---WorldMap
-    |           WorldMap.vue
-    |           world_map.js
-    |
-    +---middleware
-    |       auth.js
-    |       guest.js
-    |
-    +---mixins
-    |       form-mixin.js
-    |
-    +---pages
-    |   |   .DS_Store
-    |   |   FixedPlugin.vue
-    |   |
-    |   \---Dashboard
-    |       |   .DS_Store
-    |       |   Dashboard.vue
-    |       |
-    |       +---Components
-    |       |       Icons.vue
-    |       |       Notifications.vue
-    |       |       Typography.vue
-    |       |
-    |       +---Examples
-    |       |   |   UserProfile.vue
-    |       |   |
-    |       |   +---UserManagement
-    |       |   |       AddUserPage.vue
-    |       |   |       EditUserPage.vue
-    |       |   |       ListUserPage.vue
-    |       |   |
-    |       |   \---UserProfile
-    |       |           EditPasswordCard.vue
-    |       |           EditProfileCard.vue
-    |       |           UserProfileCard.vue
-    |       |
-    |       +---Layout
-    |       |   |   Content.vue
-    |       |   |   ContentFooter.vue
-    |       |   |   DashboardLayout.vue
-    |       |   |   TopNavbar.vue
-    |       |   |
-    |       |   \---Extra
-    |       |           MobileMenu.vue
-    |       |           UserMenu.vue
-    |       |
-    |       +---Maps
-    |       |       API_KEY.js
-    |       |       FullScreenMap.vue
-    |       |
-    |       +---Pages
-    |       |       AuthLayout.vue
-    |       |       Login.vue
-    |       |       Register.vue
-    |       |       RtlSupport.vue
-    |       |
-    |       \---Tables
-    |               RegularTables.vue
-    |
-    +---router
-    |       index.js
-    |       routes.js
-    |
-    \---store
-        |   index.js
-        |
-        +---modules
-        |       alerts-module.js
-        |       auth.js
-        |       categories-module.js
-        |       items-module.js
-        |       profile-module.js
-        |       roles-module.js
-        |       tags-module.js
-        |       users-module.js
-        |
-        \---services
-                categories-service.js
-                items-service.js
-                profile-service.js
-                roles-service.js
-                tags-service.js
-                users-service.js
+``` bash
+# clone the repo
+$ git clone https://github.com/coreui/coreui-free-vue-laravel-admin-template.git my-project
+
+# go into app's directory
+$ cd my-project/laravel
+
+# install app's dependencies
+$ composer install
+
+# install app's dependencies
+$ npm install
 ```
 
-## Browser Support
+### If you choose SQLite
 
-At present, we officially aim to support the last two versions of the following browsers:
+``` bash
 
-<img src="https://github.com/creativetimofficial/public-assets/blob/master/logos/chrome-logo.png?raw=true" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/firefox-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/edge-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/safari-logo.png" width="64" height="64"> <img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/opera-logo.png" width="64" height="64">
+# create database
+$ touch database/database.sqlite
+```
+Copy file ".env.example", and change its name to ".env".
+Then in file ".env" replace this database configuration:
+* DB_CONNECTION=mysql
+* DB_HOST=127.0.0.1
+* DB_PORT=3306
+* DB_DATABASE=laravel
+* DB_USERNAME=root
+* DB_PASSWORD=
+
+To this:
+
+* DB_CONNECTION=sqlite
+* DB_DATABASE=/path_to_your_project/database/database.sqlite
+
+### If you choose PostgreSQL
+
+1. Install PostgreSQL
+
+2. Create user
+``` bash
+$ sudo -u postgres createuser --interactive
+enter name of role to add: laravel
+shall the new role be a superuser (y/n) n
+shall the new role be allowed to create database (y/n) n
+shall the new role be allowed to create more new roles (y/n) n
+```
+3. Set user password
+``` bash
+$ sudo -u postgres psql
+postgres= ALTER USER laravel WITH ENCRYPTED PASSWORD 'password';
+postgres= \q
+```
+4. Create database
+``` bash
+$ sudo -u postgres createdb laravel
+```
+5. Copy file ".env.example", and change its name to ".env".
+Then in file ".env" replace this database configuration:
+
+* DB_CONNECTION=mysql
+* DB_HOST=127.0.0.1
+* DB_PORT=3306
+* DB_DATABASE=laravel
+* DB_USERNAME=root
+* DB_PASSWORD=
+
+To this:
+
+* DB_CONNECTION=pgsql
+* DB_HOST=127.0.0.1
+* DB_PORT=5432
+* DB_DATABASE=laravel
+* DB_USERNAME=laravel
+* DB_PASSWORD=password
+
+### If you choose MySQL
+
+Copy file ".env.example", and change its name to ".env".
+Then in file ".env" complete this database configuration:
+* DB_CONNECTION=mysql
+* DB_HOST=127.0.0.1
+* DB_PORT=3306
+* DB_DATABASE=laravel
+* DB_USERNAME=root
+* DB_PASSWORD=
+
+### Next step
+
+``` bash
+# in your app directory
+# generate laravel APP_KEY
+$ php artisan key:generate
+
+# generate jwt secret
+$ php artisan jwt:secret
+
+# run database migration and seed
+$ php artisan migrate:refresh --seed
+
+```
+
+```bash
+# go to coreui directory
+$ cd ../coreui
+
+# install app's dependencies
+$ npm install
+
+```
+
+## Usage
+
+### Test
+``` bash
+# test
+$ php vendor/bin/phpunit
+```
+
+### If you need separate backend and frontend
+
+``` bash
+# back to laravel directory
+$ cd ../laravel
+
+# start local server
+$ php artisan serve
+
+$ cd ../coreui
+
+$ npm run serve
+```
+Open your browser with address: [localhost:8080](localhost:8080)
+
+If you need change backend adress go to file /coreui/src/main.js
+And change line:
+```js
+Vue.prototype.$apiAdress = 'http://127.0.0.1:8000'
+```
+
+### If you don't need separate backend and frontend
+
+1. Go to file /laravel/routes/web.php
+And uncomment this lines:
+```php
+Route::get('/{any}', function () {
+    return view('coreui.homepage');
+})->where('any', '.*');
+```
+2. Go to file /laravel/config/filesystems.php
+And change this line:
+```php
+'root' => public_path() . '/../../coreui/public/public',
+```
+To this:
+```php
+'root' => public_path('public'),
+```
+3. Go to file /coreui/src/views/media/Media.vue
+And change this line:
+```js
+changePort: 'localhost:8080',
+```
+To this:
+```js
+changePort: 'localhost:8000',
+```
+4. 
+``` bash
+# back to laravel directory
+$ cd ../laravel
+
+# generate mixing
+$ npm run dev
+
+# and repeat generate mixing
+$ npm run dev
+
+# start local server
+$ php artisan serve
+```
+Open your browser with address: [localhost:8000](localhost:8000) 
+
+### When you have project open in browser
+
+Click "Login" on sidebar menu and log in with credentials:
+
+* E-mail: _admin@admin.com_
+* Password: _password_
+
+This user has roles: _user_ and _admin_
+
+--- 
+
+### How to add a link to the sidebar:
+
+> Instructions for CoreUI Free Vue Laravel admin template only. _Pro version have separate instruction._
+
+#### To add a __link__ to the sidebar - modify seeds file:  
+`my-project/database/seeds/MenusTableSeeder.php`
+
+In `run()` function - add `insertLink()`:
+```php
+$id = $this->insertLink( $rolesString, $visibleName, $href, $iconString);
+```
+* `$rolesString` - a string with list of user roles this menu element will be available, ex. `"guest,user,admin"`
+* `$visibleName` - a string caption visible in sidebar
+* `$href` - a href, ex. `/homepage` or `http://example.com`
+* `$iconString` - a string containing valid CoreUI Icon name (kebab-case), ex. `cil-speedometer` or `cil-pencil`
+
+To add a __title__ to the sidebar - use function `insertTitle()`:
+```php
+$id = $this->insertTitle( $rolesString, $title );
+```
+* `$rolesString` - a string with list of user roles this menu element will be available, ex. `"guest,user,admin"`
+* `$title` - a string caption visible in sidebar
+
+To add a __dropdown__ menu to the sidebar - use function `beginDropdown()`:
+```php
+$id = $this->beginDropdown( $rolesString, $visibleName, $href, $iconString);
+```
+* `$rolesString` - a string with list of user roles this menu element will be available, ex. `"guest,user,admin"`
+* `$visibleName` - a string caption visible in sidebar
+* `$href` - a href, ex. `/homepage` or `http://example.com`
+* `$iconString` - a string containing valid CoreUI icon name (kebab-case). For example: `cil-speedometer` or `cil-pencil`
+
+To end dropdown section - use function `endDropdown()`. 
+
+To add __link__ to __dropdown__ call function `insertLink()` between function calls `beginDropdown()` and `endDropdown()`. 
+Example:
+```php
+$id = $this->beginDropdown('guest,user,admin', 'Some dropdown', 'http://example.com', 'cil-puzzle');
+$id = $this->insertLink('guest,user,admin', 'Dropdown name', 'http://example.com');
+$this->endDropdown();
+```
+
+__IMPORTANT__ - At the end of `run()` function, call `joinAllByTransaction()` function:
+```php
+$this->joinAllByTransaction();
+```
+
+Once done with seeds file edit, __run__:
+``` bash 
+$ php artisan migrate:refresh --seed
+# This command also rollbacks database and migrates it again.
+```
+
+## Features
+
+### Table of contents:
+* Notes
+* Users
+* Menu management
+* Role management
+* Management of the media
+* BREAD
+* Email Templates
+
+#### Notes
+It is an example of data presentation in a pagination table, and CRUD functionality.
+
+#### Users
+It is a simple example of how to manage registered users.
+
+#### Menu management 
+Menu management allows you to toggle the visibility of menu items for individual user roles.
+
+#### Role management
+Allows you to create, edit, delete and reorder user roles.
+When a user has more than one role, the highest hierarchical role is used to create a menu for him.
+
+#### Manage media
+It allows to:
+* Create virtual media folders.
+* Send media to applications.
+* Move media between folders,
+* Cut images,
+
+#### BREAD system
+BREAD stands for: browse, read, edit, add, delete.
+Our BREAD system allows you to easily and quickly generate for any table, from the database, a simple BREAD.
+To create a new BREAD just enter a table name from the database.  Then enter a name for the form. Enter the number of rows in the browse table. Choose if you want the browse table to contain buttons: "show", "edit", "add", "delete".
+Assign roles for users who will be able to use the ready BREAD.
+Then complete each column of the table separately:
+* the column name visible to the user,
+* the input type for the column,
+The last step is to select the appropriate checkboxes:
+* browse (allows to display the column in the data table),
+* read (allows you to display the column in the show view,)
+* edit (enables column editing)
+* add (allows you to complete the column data when adding a record. Required if the column is not nullable).
+It is also possible to handle relationships with another table.
+If the column is a foreign key, it should be specified: in the field "Optional relation table name" - table name to which the foreign key refers, in the "Optional column name in relation table - to print" field - the name of the column that is in the relation table to be displayed. Finally, select one of the two "field types" that relate to the relation: 'relation select' or 'relation radio'.
+
+#### E-mail Templates
+It is an example of managing e-mail templates. Allows you to create, edit and delete templates. It also allows you to send an E-mail to a selected address.
 
 
-## Resources
-- Demo: <https://vue-material-dashboard-laravel.creative-tim.com/?ref=vmdl-readme>
-- Download Page: <https://www.creative-tim.com/product/vue-material-dashboard-laravel?ref=vmdl-readme>
-- Documentation: <https://vue-material-dashboard-laravel.creative-tim.com/documentation?ref=vmdl-readme>
-- License Agreement: <https://www.creative-tim.com/license>
-- Support: <https://www.creative-tim.com/contact-us>
-- Issues: [Github Issues Page](https://github.com/creativetimofficial/ct-vue-material-dashboard-laravel/issues)
-- **Dashboards:**
+## Creators
 
-| HTML | Laravel |
-| --- | --- |
-| [![Material Dashboard HTML](https://s3.amazonaws.com/creativetim_bucket/products/50/thumb/opt_md_thumbnail.jpg)](https://demos.creative-tim.com/material-dashboard/examples/dashboard.html?ref=vmdl-readme) | [![Material Dashboard Laravel](https://s3.amazonaws.com/creativetim_bucket/products/154/thumb/opt_md_laravel_thumbnail.jpg)](https://material-dashboard-laravel.creative-tim.com/?ref=vmdl-readme) |
+**Łukasz Holeczek**
 
-| Vue | Vue & Laravel |
-| --- | --- |
-| [![Vue Material Dashboard](https://s3.amazonaws.com/creativetim_bucket/products/81/thumb/opt_md_vue_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard?ref=vmdl-readme) | [![Vue Material Dashboard Laravel](https://s3.amazonaws.com/creativetim_bucket/products/331/thumb/opt_md_vuelaravel_thumbnail.jpg)](https://www.creative-tim.com/product/vue-material-dashboard-laravel?ref=vmdl-readme) |
+* <https://twitter.com/lukaszholeczek>
+* <https://github.com/mrholek>
 
-## Change log
+**Andrzej Kopański**
 
-Please see the [changelog](CHANGELOG.md) for more information on what has changed recently.
+* <https://github.com/xidedix>
 
-## Credits
+## Community
 
-- [Creative Tim](https://creative-tim.com/?ref=vmdl-readme)
-- [UPDIVISION](https://updivision.com)
+Get updates on CoreUI's development and chat with the project maintainers and community members.
 
-## Reporting Issues
+- Follow [@core_ui on Twitter](https://twitter.com/core_ui).
+- Read and subscribe to [CoreUI Blog](https://coreui.io/blog/).
 
-We use GitHub Issues as the official bug tracker for the Vue Material Dashboard Laravel. Here are some advices for our users that want to report an issue:
+### Community Projects
 
-1. Make sure that you are using the latest version of the Vue Material Dashboard Laravel. Check the CHANGELOG from your dashboard on our [website](https://www.creative-tim.com/?ref=vmdl-readme).
-2. Providing us reproducible steps for the issue will shorten the time it takes for it to be fixed.
-3. Some issues may be browser specific, so specifying in what browser you encountered the issue might help.
+Some of projects created by community but not maintained by CoreUI team.
 
-## Licensing
+* [NuxtJS + Vue CoreUI](https://github.com/muhibbudins/nuxt-coreui)
+* [Colmena](https://github.com/colmena/colmena)
 
-- Copyright 2019 Creative Tim (https://www.creative-tim.com/?ref=vmdl-readme)
-- [Creative Tim License](https://www.creative-tim.com/license).
+## CoreUI Icons (522 Free icons) - Premium designed free icon set with marks in SVG, Webfont and raster formats.
+
+CoreUI Icons are beautifully crafted symbols for common actions and items. You can use them in your digital products for web or mobile app. Ready-to-use fonts and stylesheets that work with your favorite frameworks.
+
+![CoreUI Free Icons](https://coreui.io/images/icons_free_bg_set.png)
 
 
-## Useful Links
+### CoreUI Icons Preview & Docs
 
-- [Tutorials](https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w)
-- [Affiliate Program](https://www.creative-tim.com/affiliates/new) (earn money)
-- [Blog Creative Tim](http://blog.creative-tim.com/)
-- [Free Products](https://www.creative-tim.com/bootstrap-themes/free) from Creative Tim
-- [Premium Products](https://www.creative-tim.com/bootstrap-themes/premium?ref=vmdl-readme) from Creative Tim
-- [React Products](https://www.creative-tim.com/bootstrap-themes/react-themes?ref=vmdl-readme) from Creative Tim
-- [Angular Products](https://www.creative-tim.com/bootstrap-themes/angular-themes?ref=vmdl-readme) from Creative Tim
-- [VueJS Products](https://www.creative-tim.com/bootstrap-themes/vuejs-themes?ref=vmdl-readme) from Creative Tim
-- [More products](https://www.creative-tim.com/bootstrap-themes?ref=vmdl-readme) from Creative Tim
-- Check our Bundles [here](https://www.creative-tim.com/bundles??ref=vmdl-readme)
+[https://coreui.io/icons/](https://coreui.io/icons/)
 
-## Social Media
+## Copyright and license
 
-### Creative Tim:
+copyright 2018 creativeLabs Łukasz Holeczek. Code released under [the MIT license](https://github.com/coreui/coreui-free-laravel-admin-template/blob/master/LICENSE).
+There is only one limitation you can't can’t re-distribute the CoreUI as stock. You can’t do this if you modify the CoreUI. In past we faced some problems with persons who tried to sell CoreUI based templates.
 
-Twitter: <https://twitter.com/CreativeTim?ref=vmdl-readme>
+## Support CoreUI Development
 
-Facebook: <https://www.facebook.com/CreativeTim?ref=vmdl-readme>
+CoreUI is an MIT licensed open source project and completely free to use. However, the amount of effort needed to maintain and develop new features for the project is not sustainable without proper financial backing. You can support development by donating on [PayPal](https://www.paypal.me/holeczek), buying [CoreUI Pro Version](https://coreui.io/pro) or buying one of our [premium admin templates](https://genesisui.com/?support=1).
 
-Dribbble: <https://dribbble.com/creativetim?ref=vmdl-readme>
-
-Instagram: <https://www.instagram.com/CreativeTimOfficial?ref=vmdl-readme>
-
-
-### Updivision:
-
-Twitter: <https://twitter.com/updivision?ref=vmdl-readme>
-
-Facebook: <https://www.facebook.com/updivision?ref=vmdl-readme>
-
-Linkedin: <https://www.linkedin.com/company/updivision?ref=vmdl-readme>
-
-Updivision Blog: <https://updivision.com/blog/?ref=vmdl-readme>
-
-## Credits
-
-- [Creative Tim](https://creative-tim.com/?ref=mdpl-readme)
-- [UPDIVISION](https://updivision.com)
+As of now I am exploring the possibility of working on CoreUI fulltime - if you are a business that is building core products using CoreUI, I am also open to conversations regarding custom sponsorship / consulting arrangements. Get in touch on [Twitter](https://twitter.com/lukaszholeczek).
