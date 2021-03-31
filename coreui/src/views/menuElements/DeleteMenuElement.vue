@@ -13,7 +13,7 @@
             ({{dismissCountDown}}) {{ message }}
           </CAlert>
 
-          <CButton color="danger" @click="deleteMenu()">Delete</CButton>
+          <CButton color="danger mr-2" @click="deleteMenu()">Delete</CButton>
           <CButton color="primary" @click="goBack">Back</CButton>
         </CCardBody>
       </CCard>
