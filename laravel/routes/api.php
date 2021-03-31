@@ -37,11 +37,12 @@ Route::group(['middleware' => 'api'], function ($router) {
         // Route::resource('departments', 'DepartmentsController')->except( ['create'] );
 
         Route::prefix('departments')->group(function () { 
-            Route::get('/'            , 'DepartmentsController@index')->name('departments.index');
-            Route::post('/store'       , 'DepartmentsController@store')->name('departments.store');
-            Route::get('/show'   , 'DepartmentsController@show')->name('departments.show');
-            Route::get('/edit/{id}'   , 'DepartmentsController@edit')->name('departments.edit');
-            Route::get('/delete/{id}' , 'DepartmentsController@delete')->name('departments.delete');
+            Route::get('/'        , 'DepartmentsController@index')->name('departments.index');
+            Route::get('/edit'    , 'DepartmentsController@edit')->name('departments.edit');
+            Route::get('/show'    , 'DepartmentsController@show')->name('departments.show');            
+            Route::get('/delete' , 'DepartmentsController@delete')->name('departments.delete');
+            Route::post('/store'  , 'DepartmentsController@store')->name('departments.store');
+            Route::post('/update' , 'DepartmentsController@update')->name('departments.update');
         });
 
         Route::prefix('menu/menu')->group(function () { 

@@ -38,14 +38,14 @@ export default {
   },
   data: () => {
     return {
-        name: '',
-        total_floor: '',
-        total_block: '',
-        showMessage: false,
-        message: '',
-        dismissSecs: 7,
-        dismissCountDown: 0,
-        showDismissibleAlert: false
+        name                 : '',
+        total_floor          : '',
+        total_block          : '',
+        showMessage          : false,
+        message              : '',
+        dismissSecs          : 7,
+        dismissCountDown     : 0,
+        showDismissibleAlert : false
     }
   },
   methods: {
@@ -55,13 +55,14 @@ export default {
     },
     update() {
         let self = this;
-        axios.post(  this.$apiAdress + '/api/departments/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"),
-        {
-            _method: 'PUT',
-            name: self.name,
-            total_floor: self.total_floor,
-            total_block: self.total_block,
-        })
+        axios.post(  this.$apiAdress + '/api/departments/update?token=' + localStorage.getItem("api_token"),
+          {
+            id          : self.$route.params.id,
+            name        : self.name,
+            total_floor : self.total_floor,
+            total_block : self.total_block,
+          }
+        )        
         .then(function (response) {
             self.message = 'Successfully updated Department.';
             self.showAlert();
@@ -79,14 +80,14 @@ export default {
   },
   mounted: function(){
     let self = this;
-    axios.get(  this.$apiAdress + '/api/departments/' + self.$route.params.id + '/edit?token=' + localStorage.getItem("api_token"))
+    axios.get(  this.$apiAdress + '/api/departments/edit?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )    
     .then(function (response) {
         self.name = response.data.name;
         self.total_floor = response.data.total_floor;
         self.total_block = response.data.total_block;
     }).catch(function (error) {
         console.log(error);
-        self.$router.push({ path: '/login' });
+        // self.$router.push({ path: '/login' });
     });
   }
 }

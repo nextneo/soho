@@ -72,30 +72,19 @@ export default {
     previousButtonHtml: 'prev',
     nextButtonHtml: 'next'
   },
-  methods: {    
-    DepartmentLink (id) {
-      return `Departments/${id.toString()}`
-    },
-    editLink (id) {
-      return `Departments/${id.toString()}/edit`
-    },
+  methods: {        
     showDepartment ( id ) {
-      const DepartmentLink = this.DepartmentLink( id );
-      this.$router.push({path: DepartmentLink});
+      this.$router.push({path: `departments/${id.toString()}`});
     },
     editDepartment ( id ) {
-      const editLink = this.editLink( id );
-      this.$router.push({path: editLink});
+      this.$router.push({path: `departments/${id.toString()}/edit`});
     },
     createDepartment(){
-      this.$router.push({path: 'Departments/create'});
+      this.$router.push({path: 'departments/create'});
     },
     deleteDepartment ( id ) {
       let self = this;
-      let DepartmentId = id;
-      axios.post(  this.$apiAdress + '/api/departments/' + id + '?token=' + localStorage.getItem("api_token"), {
-        _method: 'DELETE'
-      })
+      axios.get(  this.$apiAdress + '/api/departments/delete?token=' + localStorage.getItem("api_token") + '&id=' + id, {})
       .then(function (response) {
           self.message = 'Successfully deleted Department.';
           self.showAlert();

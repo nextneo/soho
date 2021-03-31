@@ -28,7 +28,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'Department',
+  name: 'ShowDepartment',
   data: () => {
     return {
       items: [],
@@ -50,7 +50,7 @@ export default {
   },
   mounted: function(){
     let self = this;
-    axios.get(  this.$apiAdress + '/api/departments/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"))
+    axios.get(  this.$apiAdress + '/api/departments/show?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
     .then(function (response) {
       const items = Object.entries(response.data);
       self.items = items.map(([key, value]) => {return {key: key, value: value}});

@@ -16,8 +16,8 @@
 
           <CInput label="Name" type="text" placeholder="Name" v-model="name"></CInput>
 
-          <CButton color="primary" @click="store()">Create</CButton>
-          <CButton color="primary" @click="goBack">Back</CButton>
+          <CButton color="info mr-2" @click="store()">Create</CButton>
+          <CButton color="secondary" @click="goBack">Back</CButton>
         </CCardBody>
       </CCard>
     </CCol>

@@ -100,8 +100,8 @@ const EditUser = () =>
 // Departments
 const Departments = () =>
     import ('@/views/departments/Departments')
-const Department = () =>
-    import ('@/views/departments/Department')
+const ShowDepartment = () =>
+    import ('@/views/departments/ShowDepartment')
 const EditDepartment = () =>
     import ('@/views/departments/EditDepartment')
 const CreateDepartment = () =>
@@ -451,7 +451,7 @@ function configRoutes() {
                     label: 'Department Details'
                 },
                 name: 'Department',
-                component: Department,
+                component: ShowDepartment,
                 meta: {
                     requiresAdmin: true
                 }

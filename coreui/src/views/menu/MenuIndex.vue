@@ -58,7 +58,7 @@ export default {
       this.$router.push({path: `menuelement/${id.toString()}/menuelement`});
     },
     addMenu(){
-      this.$router.push({path: 'create'});
+      this.$router.push({path: 'menu/create'});
     },
     editMenu(id){
       this.$router.push({path: `menu/${id.toString()}/edit`});
