@@ -15,7 +15,8 @@ class DepartmentsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api');
+        $this->middleware('auth');
+        $this->middleware('admin');
     }
 
     /**
@@ -39,8 +40,10 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->input('id');     
+        
         $department = DB::table('departments')
         ->select('departments.id', 'departments.name', 'departments.total_floor', 'departments.total_block')
         ->where('departments.id', '=', $id)
@@ -55,8 +58,10 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
+        $id = $request->input('id');
+        
         $department = DB::table('departments')
         ->select('departments.id', 'departments.name', 'departments.total_floor', 'departments.total_block')
         ->where('departments.id', '=', $id)
@@ -72,14 +77,16 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
+
         $validatedData = $request->validate([
             'name'        => 'required|min:1|max:50',
             'total_floor' => 'min:1|max:99',
             'total_block' => 'min:1|max:99'
         ]);
 
+        $id = $request->input('id');
         $department = Departments::find($id);
         $department->name        = $request->input('name');
         $department->total_floor = $request->input('total_floor');
@@ -95,8 +102,10 @@ class DepartmentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Request $request)
     {
+        $id = $request->input('id');
+
         $department = Departments::find($id);
         if($department){
             $department->delete();
@@ -104,7 +113,11 @@ class DepartmentsController extends Controller
         return response()->json( ['status' => 'success'] );
     }
 
-
+    /**
+     * [store description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function store(Request $request){
         $validatedData = $request->validate([
             'name' => 'required|min:1|max:50',
