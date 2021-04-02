@@ -3,7 +3,7 @@
     <CCol col="12">
       <CCard>
         <CCardHeader>
-          User id:  {{ $route.params.id }}
+          Block id:  {{ $route.params.id }}
         </CCardHeader>
         <CCardBody>
           <CDataTable 
@@ -11,10 +11,9 @@
             small 
             fixed
             :items="items" 
-            :fields="fields"
-          >
+            :fields="fields">
             <template slot="value" slot-scope="data">
-              <td>{{data.item.value}}</td>              
+              <td>{{data.item.value}}</td>
             </template>
           </CDataTable>  
         </CCardBody>
@@ -29,7 +28,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'User',
+  name: 'ShowBlock',
   data: () => {
     return {
       items: [],
@@ -40,10 +39,10 @@ export default {
     }
   },
   methods: {
-    getUserData (id) {
-      const user = usersData.find((user, index) => index + 1 == id)
-      const userDetails = user ? Object.entries(user) : [['id', 'Not found']]
-      return userDetails.map(([key, value]) => { return { key, value } })
+    getBlockData (id) {
+      const Block = BlocksData.find((Block, index) => index + 1 == id)
+      const BlockDetails = Block ? Object.entries(Block) : [['id', 'Not found']]
+      return BlockDetails.map(([key, value]) => { return { key, value } })
     },
     goBack() {
       this.$router.go(-1)
@@ -51,7 +50,7 @@ export default {
   },
   mounted: function(){
     let self = this;
-    axios.get(  this.$apiAdress + '/api/users/show?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
+    axios.get(  this.$apiAdress + '/api/blocks/show?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
     .then(function (response) {
       const items = Object.entries(response.data);
       self.items = items.map(([key, value]) => {return {key: key, value: value}});

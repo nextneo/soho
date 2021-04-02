@@ -92,10 +92,12 @@ const Register = () =>
 // Users
 const Users = () =>
     import ('@/views/users/Users')
-const User = () =>
+const ShowUser = () =>
     import ('@/views/users/User')
 const EditUser = () =>
     import ('@/views/users/EditUser')
+const CreateUser = () =>
+    import ('@/views/users/CreateUser')
 
 // Departments
 const Departments = () =>
@@ -106,6 +108,26 @@ const EditDepartment = () =>
     import ('@/views/departments/EditDepartment')
 const CreateDepartment = () =>
     import ('@/views/departments/CreateDepartment')
+
+// Blocks
+const Blocks = () =>
+    import ('@/views/blocks/Blocks')
+const ShowBlock = () =>
+    import ('@/views/blocks/ShowBlock')
+const EditBlock = () =>
+    import ('@/views/blocks/EditBlock')
+const CreateBlock = () =>
+    import ('@/views/blocks/CreateBlock')
+
+// Apartments
+const Apartments = () =>
+import ('@/views/apartments/Apartments')
+const ShowApartment = () =>
+import ('@/views/apartments/ShowApartment')
+const EditApartment = () =>
+import ('@/views/apartments/EditApartment')
+const CreateApartment = () =>
+import ('@/views/apartments/CreateApartment')
 
 //Notes
 const Notes = () =>
@@ -399,12 +421,22 @@ function configRoutes() {
                     requiresAdmin: true
                 }
             }, {
+                path: 'create',
+                meta: {
+                    label: 'Create User'
+                },
+                name: 'Create User',
+                component: CreateUser,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
                 path: ':id',
                 meta: {
                     label: 'User Details'
                 },
                 name: 'User',
-                component: User,
+                component: ShowUser,
                 meta: {
                     requiresAdmin: true
                 }
@@ -462,6 +494,100 @@ function configRoutes() {
                 },
                 name: 'Edit Department',
                 component: EditDepartment,
+                meta: {
+                    requiresAdmin: true
+                }
+            }]
+        }, {
+            path: 'blocks',
+            meta: {
+                label: 'Blocks'
+            },
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            children: [{
+                path: '',
+                component: Blocks,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: 'create',
+                meta: {
+                    label: 'Create block'
+                },
+                name: 'Create block',
+                component: CreateBlock,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id',
+                meta: {
+                    label: 'Block Details'
+                },
+                name: 'Block',
+                component: ShowBlock,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id/edit',
+                meta: {
+                    label: 'Edit Block'
+                },
+                name: 'Edit Block',
+                component: EditBlock,
+                meta: {
+                    requiresAdmin: true
+                }
+            }]
+        }, {
+            path: 'apartments',
+            meta: {
+                label: 'Apartments'
+            },
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            children: [{
+                path: '',
+                component: Apartments,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: 'create',
+                meta: {
+                    label: 'Create Apartment'
+                },
+                name: 'Create Apartment',
+                component: CreateApartment,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id',
+                meta: {
+                    label: 'Apartment Details'
+                },
+                name: 'Apartment',
+                component: ShowApartment,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id/edit',
+                meta: {
+                    label: 'Edit Apartment'
+                },
+                name: 'Edit Apartment',
+                component: EditApartment,
                 meta: {
                     requiresAdmin: true
                 }

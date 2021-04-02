@@ -38,6 +38,6 @@ class DepartmentsSeeder extends Seeder
             }
         } catch (\Throwable $th) {
 
-        }        
+        }
     }
 }

@@ -7,10 +7,12 @@ import {
     iconsSet as icons
 } from './assets/icons/icons.js'
 import store from './store'
+import CKEditor from 'ckeditor4-vue'
 
 Vue.prototype.$apiAdress = 'http://localhost'
 Vue.config.performance = true
 Vue.use(CoreuiVue)
+Vue.use(CKEditor)
 
 new Vue({
     el: '#app',

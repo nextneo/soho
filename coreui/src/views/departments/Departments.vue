@@ -1,14 +1,17 @@
 <template>
   <CRow>
     <CCol col="12">
-
       <transition name="slide">
       <CCard>
         <CCardHeader>
             Departments
         </CCardHeader>
         <CCardBody>
-          <CButton color="primary mb-2" @click="createDepartment()">Create</CButton>      
+          <CButton color="primary mb-2 mr-2" @click="createDepartment()">Create</CButton>
+          <CButton color="secondary mb-2" @click="showModal()">
+            <CIcon :content="$options.freeSet.cilOptionsHorizontal"/>
+          </CButton>
+
           <CAlert
             :show.sync="dismissCountDown"
             color="primary"
@@ -23,7 +26,7 @@
             :fields="fields"
             :items-per-page="5"
             pagination
-          >         
+          >
           <template #show="{item}">
             <td>
               <CButton color="primary" @click="showDepartment( item.id )">Show</CButton>
@@ -44,14 +47,20 @@
       </CCard>
       </transition>
     </CCol>
+    <CCol col="12">
+      <SearchDepartments ref="childComponent" @return="callBack"></SearchDepartments>
+    </CCol>
   </CRow>
 </template>
 
 <script>
 import axios from 'axios'
+import SearchDepartments from './SearchDepartments.vue'
+import { freeSet } from '@coreui/icons'
 
 export default {
   name: 'Departments',
+  freeSet,
   data: () => {
     return {
       items: [],
@@ -63,8 +72,12 @@ export default {
       showMessage: false,
       dismissSecs: 7,
       dismissCountDown: 0,
-      showDismissibleAlert: false
+      showDismissibleAlert: false,
+      largeModal: false,
     }
+  },
+  components: {
+    SearchDepartments
   },
   paginationProps: {
     align: 'center',
@@ -72,7 +85,7 @@ export default {
     previousButtonHtml: 'prev',
     nextButtonHtml: 'next'
   },
-  methods: {        
+  methods: {
     showDepartment ( id ) {
       this.$router.push({path: `departments/${id.toString()}`});
     },
@@ -102,13 +115,22 @@ export default {
     },
     getDepartments (){
       let self = this;
-      axios.get(  this.$apiAdress + '/api/departments?token=' + localStorage.getItem("api_token"))            
-      .then(function (response) {        
+      axios.get(  this.$apiAdress + '/api/departments?token=' + localStorage.getItem("api_token"))
+      .then(function (response) {
         self.items = response.data.departments;
       }).catch(function (error) {
         console.log(error);
         // self.$router.push({ path: '/login' });
       });
+    },
+    showModal(){
+      this.$refs.childComponent.show();
+    },
+    callBack(id){
+      console.log(id);
+    },
+    toKebabCase (str) {
+      return str.replace(/([a-z])([A-Z0-9])/g, '$1-$2').toLowerCase()
     }
   },
   mounted: function(){

@@ -1,13 +1,14 @@
 <template>
   <CRow>
-    <CCol col="12">
+    <CCol col="14">
+
       <transition name="slide">
       <CCard>
         <CCardHeader>
-            Users
+            Apartments
         </CCardHeader>
         <CCardBody>
-          <CButton color="primary mb-2" @click="createUser()">Create</CButton>      
+          <CButton color="primary mb-2" @click="createApartment()">Create</CButton>      
           <CAlert
             :show.sync="dismissCountDown"
             color="primary"
@@ -22,25 +23,20 @@
             :fields="fields"
             :items-per-page="5"
             pagination
-          >
-          <template #status="{item}">
-            <td>
-              <CBadge :color="getBadge(item.status)">{{ item.status }}</CBadge>
-            </td>
-          </template>
+          >         
           <template #show="{item}">
             <td>
-              <CButton color="primary" @click="showUser( item.id )">Show</CButton>
+              <CButton color="primary" @click="showApartment( item.id )">Show</CButton>
             </td>
           </template>
           <template #edit="{item}">
             <td>
-              <CButton color="primary" @click="editUser( item.id )">Edit</CButton>
+              <CButton color="primary" @click="editApartment( item.id )">Edit</CButton>
             </td>
           </template>
           <template #delete="{item}">
             <td>
-              <CButton v-if="you!=item.id" color="danger" @click="deleteUser( item.id )">Delete</CButton>
+              <CButton color="danger" @click="deleteApartment( item.id )">Delete</CButton>
             </td>
           </template>
         </CDataTable>
@@ -55,15 +51,14 @@
 import axios from 'axios'
 
 export default {
-  name: 'Users',
+  name: 'Apartments',
   data: () => {
     return {
       items: [],
-      fields: ['id', 'name', 'registered', 'roles', 'status', 'show', 'edit', 'delete'],
+      fields: ['id', 'block_id', 'code', 'floor', 'acreage', 'total_bedroom', 'total_toilet', 'room_view', 'selling_price', 'rental_price', 'info', 'status', 'show', 'edit', 'delete'],
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
-      you: null,
       message: '',
       showMessage: false,
       dismissSecs: 7,
@@ -77,29 +72,23 @@ export default {
     previousButtonHtml: 'prev',
     nextButtonHtml: 'next'
   },
-  methods: {
-    getBadge (status) {
-      return status === 'Active' ? 'success'
-        : status === 'Inactive' ? 'secondary'
-          : status === 'Pending' ? 'warning'
-            : status === 'Banned' ? 'danger' : 'primary'
+  methods: {        
+    showApartment ( id ) {
+      this.$router.push({path: `apartments/${id.toString()}`});
     },
-    showUser ( id ) {
-      this.$router.push({path: `users/${id.toString()}`});
+    editApartment ( id ) {
+      this.$router.push({path: `apartments/${id.toString()}/edit`});
     },
-    editUser ( id ) {
-      this.$router.push({path: `users/${id.toString()}/edit`});
+    createApartment(){
+      this.$router.push({path: 'apartments/create'});
     },
-    createUser(){
-      this.$router.push({path: 'users/create'});
-    },
-    deleteUser ( id ) {
+    deleteApartment ( id ) {
       let self = this;
-      axios.get(  this.$apiAdress + '/api/users/delete?token=' + localStorage.getItem("api_token") + '&id=' + id, {})
+      axios.get(  this.$apiAdress + '/api/apartments/delete?token=' + localStorage.getItem("api_token") + '&id=' + id, {})
       .then(function (response) {
-          self.message = 'Successfully deleted user.';
+          self.message = 'Successfully deleted apartment.';
           self.showAlert();
-          self.getUsers();
+          self.getApartments();
       }).catch(function (error) {
         console.log(error);
         // self.$router.push({ path: '/login' });
@@ -111,12 +100,11 @@ export default {
     showAlert () {
       this.dismissCountDown = this.dismissSecs
     },
-    getUsers (){
+    getApartments (){
       let self = this;
-      axios.get(  this.$apiAdress + '/api/users?token=' + localStorage.getItem("api_token"))
-      .then(function (response) {
-        self.items = response.data.users;
-        self.you = response.data.you;
+      axios.get(  this.$apiAdress + '/api/apartments?token=' + localStorage.getItem("api_token"))            
+      .then(function (response) {        
+        self.items = response.data.apartments;
       }).catch(function (error) {
         console.log(error);
         // self.$router.push({ path: '/login' });
@@ -124,7 +112,7 @@ export default {
     }
   },
   mounted: function(){
-    this.getUsers();
+    this.getApartments();
   }
 }
 </script>

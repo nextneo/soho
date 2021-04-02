@@ -53,10 +53,10 @@ export default {
     },
     update() {
         let self = this;
-        axios.post(  this.$apiAdress + '/api/users/' + self.$route.params.id + '?token=' + localStorage.getItem("api_token"),
+        axios.post(  this.$apiAdress + '/api/users/update?token=' + localStorage.getItem("api_token"),
         {
-            _method: 'PUT',
-            name: self.name,
+            id   : self.$route.params.id,
+            name : self.name,
             email: self.email,
         })
         .then(function (response) {
@@ -64,7 +64,7 @@ export default {
             self.showAlert();
         }).catch(function (error) {
             console.log(error);
-            self.$router.push({ path: '/login' });
+            // self.$router.push({ path: '/login' });
         });
     },
     countDownChanged (dismissCountDown) {
@@ -76,13 +76,13 @@ export default {
   },
   mounted: function(){
     let self = this;
-    axios.get(  this.$apiAdress + '/api/users/' + self.$route.params.id + '/edit?token=' + localStorage.getItem("api_token"))
+    axios.get(  this.$apiAdress + '/api/users/edit?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )    
     .then(function (response) {
-        self.name = response.data.name;
+        self.name  = response.data.name;
         self.email = response.data.email;
     }).catch(function (error) {
         console.log(error);
-        self.$router.push({ path: '/login' });
+        // self.$router.push({ path: '/login' });
     });
   }
 }
