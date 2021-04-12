@@ -139,9 +139,9 @@ class MenusTableSeeder extends Seeder
         $this->insertLink('guest', 'Login', '/login', 'cil-account-logout');
         $this->insertLink('guest', 'Register', '/register', 'cil-account-logout');
         $this->beginDropdown('admin', 'Settings', '/settings', 'cil-puzzle');
-            $this->insertLink('admin' , 'Media' , '/media');
+            // $this->insertLink('admin' , 'Media' , '/media');
             $this->insertLink('admin' , 'Menu'  , '/menu');
-            $this->insertLink('admin' , 'BREAD' , '/bread');
+            // $this->insertLink('admin' , 'BREAD' , '/bread');
             $this->insertLink('admin' , 'Email' , '/email');
         $this->endDropdown();
 
@@ -151,13 +151,13 @@ class MenusTableSeeder extends Seeder
             $this->insertLink('admin' , 'Departments' , '/departments');
             $this->insertLink('admin' , 'Blocks'      , '/blocks');
             $this->insertLink('admin' , 'Apartments'  , '/apartments');
-            $this->insertLink('admin' , 'Owner'       , '/owner');
         $this->endDropdown();
 
         // Pages
         $this->beginDropdown('user,admin', 'Pages', '/pages', 'cil-star');
-            $this->insertLink('admin' , 'Category news' , '/category-news');
+            $this->insertLink('admin' , 'Category news' , '/category');
             $this->insertLink('admin' , 'News' , '/news');
+            $this->insertLink('user,admin' , 'Index' , 'pages/index');
         $this->endDropdown();
 
         $this->beginDropdown('user,admin', 'Icons', '/icon', 'cil-star');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Blocks;
+use Validator;
 
 class BlocksController extends Controller
 {
@@ -20,6 +21,18 @@ class BlocksController extends Controller
     }
 
     /**
+     * getValidator
+     *
+     */
+    protected function getValidator($data)
+    {
+        return Validator::make($data, [
+            'department_id'   => ['required'],
+            'name'            => ['required', 'max:50'],
+        ]);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -27,14 +40,10 @@ class BlocksController extends Controller
     public function index()
     {
         $blocks = DB::table('blocks')
-        ->select('blocks.id', 'blocks.department_id', 'blocks.name', 'blocks.info')
-        ->whereNull('deleted_at')
+        ->select('blocks.id', 'blocks.department_id', 'departments.name as department_name', 'blocks.name')
+        ->join('departments', 'departments.id', '=' ,'blocks.department_id')
+        ->whereNull('blocks.deleted_at')
         ->get();
-        foreach($blocks as $block){
-            $block->departments_name = '';
-            $departments = DB::table('departments')->select('departments.id', 'departments.name')->where('departments.id', '=', $block->department_id)->first();
-            $block->departments_name = $departments->name;          
-        }           
         return response()->json( compact('blocks') );
     }
 
@@ -46,15 +55,13 @@ class BlocksController extends Controller
      */
     public function show(Request $request)
     {
-        $id = $request->input('id');     
-        
+        $id = $request->input('id');
+
         $block = DB::table('blocks')
-        ->select('blocks.id', 'blocks.name', 'blocks.info', 'blocks.department_id')
+        ->select('blocks.id', 'blocks.department_id', 'departments.name as department_name', 'blocks.name', 'blocks.info')
+        ->join('departments', 'departments.id', '=' ,'blocks.department_id')
         ->where('blocks.id', '=', $id)
         ->first();
-
-        $departments = DB::table('departments')->select('departments.id', 'departments.name')->where('departments.id', '=', $block->department_id)->first();
-        $block->department_name = $departments->name;
         return response()->json( $block);
     }
 
@@ -70,16 +77,12 @@ class BlocksController extends Controller
         $block = null;
         if($id != ''){
             $block = DB::table('blocks')
-            ->select('blocks.id', 'blocks.department_id', 'blocks.name', 'blocks.info')
+            ->select('blocks.id', 'blocks.department_id', 'departments.name as department_name', 'blocks.name', 'blocks.info')
+            ->join('departments', 'departments.id', '=' ,'blocks.department_id')
             ->where('blocks.id', '=', $id)
             ->first();
         }
-        $departments = DB::table('departments')->select('departments.id', 'departments.name')->whereNull('deleted_at')->get();
-        $data = [
-            'block' => $block,
-            'departments'=> $departments,
-        ];
-        return response()->json( $data );
+        return response()->json( $block );
     }
 
     /**
@@ -91,18 +94,22 @@ class BlocksController extends Controller
      */
     public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name'          => 'required|min:1|max:50',
-            'department_id' => 'required'
-        ]);
-
-        $id = $request->input('id');
-        $block = Blocks::find($id);
-        $block->department_id   = $request->input('department_id');
-        $block->name            = $request->input('name');
-        $block->info            = $request->input('info');    
-        $block->save();
-        return response()->json( ['status' => 'success'] );
+        $data = $request->all();
+        $validator = $this->getValidator($data);
+        if ($validator->fails()) {
+            return response()->json( [
+                'status' => 'error',
+                'errors' => $validator->getMessageBag()->toArray()]
+            );
+        } else {
+            $id = $request->input('id');
+            $block = Blocks::find($id);
+            $block->department_id   = $request->input('department_id');
+            $block->name            = $request->input('name');
+            $block->info            = $request->input('info');
+            $block->save();
+            return response()->json( ['status' => 'success'] );
+        }
     }
 
     /**
@@ -128,17 +135,20 @@ class BlocksController extends Controller
      * @return
      */
     public function store(Request $request){
-        $validatedData = $request->validate([
-            'name' => 'required|min:1|max:50',
-            'department_id' => 'required'
-        ]);
-
-        $block = new Blocks();
-        $block->department_id   = $request->input('department_id');
-        $block->name            = $request->input('name');
-        $block->info            = $request->input('info'); 
-        $block->save();
-
-        return response()->json( ['status' => 'success'] );
+        $data = $request->all();
+        $validator = $this->getValidator($data);
+        if ($validator->fails()) {
+            return response()->json( [
+                'status' => 'error',
+                'errors' => $validator->getMessageBag()->toArray()]
+            );
+        } else {
+            $block = new Blocks();
+            $block->department_id   = $request->input('department_id');
+            $block->name            = $request->input('name');
+            $block->info            = $request->input('info');
+            $block->save();
+            return response()->json( ['status' => 'success'] );
+        }
     }
 }

@@ -5,6 +5,9 @@ import Router from 'vue-router'
 const TheContainer = () =>
     import ('@/containers/TheContainer')
 
+const TheAppContainer = () =>
+    import ('@/containers/TheAppContainer')
+
 // Views
 const Dashboard = () =>
     import ('@/views/Dashboard')
@@ -88,6 +91,12 @@ const Login = () =>
     import ('@/views/pages/Login')
 const Register = () =>
     import ('@/views/pages/Register')
+const Forgot = () =>
+    import ('@/views/pages/Forgot')
+
+// Views - Front end
+const Index = () =>
+    import ('@/views/pages/Index')
 
 // Users
 const Users = () =>
@@ -121,13 +130,13 @@ const CreateBlock = () =>
 
 // Apartments
 const Apartments = () =>
-import ('@/views/apartments/Apartments')
+    import ('@/views/apartments/Apartments')
 const ShowApartment = () =>
-import ('@/views/apartments/ShowApartment')
+    import ('@/views/apartments/ShowApartment')
 const EditApartment = () =>
-import ('@/views/apartments/EditApartment')
+    import ('@/views/apartments/EditApartment')
 const CreateApartment = () =>
-import ('@/views/apartments/CreateApartment')
+    import ('@/views/apartments/CreateApartment')
 
 //Notes
 const Notes = () =>
@@ -204,6 +213,26 @@ const ShowMenuElement = () =>
     import ('@/views/menuElements/ShowMenuElement')
 const DeleteMenuElement = () =>
     import ('@/views/menuElements/DeleteMenuElement')
+
+// Category new
+const Categorys = () =>
+    import ('@/views/category/Categorys')
+const ShowCategory = () =>
+    import ('@/views/category/ShowCategory')
+const EditCategory = () =>
+    import ('@/views/category/EditCategory')
+const CreateCategory = () =>
+    import ('@/views/category/CreateCategory')
+
+// News
+const News = () =>
+    import ('@/views/news/News')
+const ShowNew = () =>
+    import ('@/views/news/ShowNew')
+const EditNew = () =>
+    import ('@/views/news/EditNew')
+const CreateNew = () =>
+    import ('@/views/news/CreateNew')
 
 const Media = () =>
     import ('@/views/media/Media')
@@ -744,6 +773,100 @@ function configRoutes() {
                 }
             }, ]
         }, {
+            path: 'category',
+            meta: {
+                label: 'Categorys'
+            },
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            children: [{
+                path: '',
+                component: Categorys,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: 'create',
+                meta: {
+                    label: 'Create Category'
+                },
+                name: 'Create category',
+                component: CreateCategory,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id',
+                meta: {
+                    label: 'Category Details'
+                },
+                name: 'Category',
+                component: ShowCategory,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id/edit',
+                meta: {
+                    label: 'Edit category'
+                },
+                name: 'Edit category',
+                component: EditCategory,
+                meta: {
+                    requiresAdmin: true
+                }
+            }]
+        }, {
+            path: 'news',
+            meta: {
+                label: 'News'
+            },
+            component: {
+                render(c) {
+                    return c('router-view')
+                }
+            },
+            children: [{
+                path: '',
+                component: News,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: 'create',
+                meta: {
+                    label: 'Create New'
+                },
+                name: 'Create New',
+                component: CreateNew,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id',
+                meta: {
+                    label: 'New Details'
+                },
+                name: 'New',
+                component: ShowNew,
+                meta: {
+                    requiresAdmin: true
+                }
+            }, {
+                path: ':id/edit',
+                meta: {
+                    label: 'Edit New'
+                },
+                name: 'Edit New',
+                component: EditNew,
+                meta: {
+                    requiresAdmin: true
+                }
+            }]
+        }, {
             path: 'email',
             meta: {
                 label: 'Emails'
@@ -1100,10 +1223,27 @@ function configRoutes() {
             path: 'register',
             name: 'Register',
             component: Register
+        }, {
+            path: 'forgot',
+            name: 'Forgot',
+            component: Forgot
         }, ]
     }, {
         path: '*',
         name: '404',
         component: Page404
+    }, {
+        path: '/pages',
+        redirect: '/pages/Index',
+        name: 'Pages',
+        component: TheAppContainer,
+        children: [{
+            path: 'Index',
+            name: 'Index',
+            component: Index,
+            meta: {
+                requiresUser: false
+            }
+        }]
     }]
 }

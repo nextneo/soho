@@ -2,20 +2,46 @@
   <CRow>
     <CCol col="12">
       <CCard>
-        <CCardHeader>
-          Block id:  {{ $route.params.id }}
-        </CCardHeader>
         <CCardBody>
-          <CDataTable 
-            striped 
-            small 
-            fixed
-            :items="items" 
-            :fields="fields">
-            <template slot="value" slot-scope="data">
-              <td>{{data.item.value}}</td>
-            </template>
-          </CDataTable>  
+          <CForm>
+            <CRow class="align-middle">
+              <CCol col="3">
+                Block ID
+              </CCol>
+              <CCol col="3">
+                 <CInput type="text" v-model="id" disabled="disabled"></CInput>
+              </CCol>
+              <CCol col="3">
+                Block Name
+              </CCol>
+              <CCol col="3">
+                 <CInput type="text" v-model="name" disabled="disabled"></CInput>
+              </CCol>
+            </CRow>
+            <CRow class="align-middle">
+              <CCol col="3">
+                Departmant ID
+              </CCol>
+              <CCol col="3">
+                 <CInput type="text" v-model="department_id" disabled="disabled"></CInput>
+              </CCol>
+              <CCol col="3">
+                Departmant Name
+              </CCol>
+              <CCol col="3">
+                 <CInput type="text" v-model="department_name" disabled="disabled"></CInput>
+              </CCol>
+            </CRow>
+
+            <CRow class="align-middle">
+              <CCol col="3">
+                Info
+              </CCol>
+              <CCol col="9">
+                   <span v-html="info"> </span>
+              </CCol>
+            </CRow>
+          </CForm>
         </CCardBody>
         <CCardFooter>
           <CButton color="secondary" @click="goBack">Back</CButton>
@@ -31,11 +57,11 @@ export default {
   name: 'ShowBlock',
   data: () => {
     return {
-      items: [],
-      fields: [
-        {key: 'key'},
-        {key: 'value'},
-      ],
+      department_id     : '',
+      department_name   : '',
+      id                : '',
+      name              : '',
+      info              : '',
     }
   },
   methods: {
@@ -52,8 +78,14 @@ export default {
     let self = this;
     axios.get(  this.$apiAdress + '/api/blocks/show?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
     .then(function (response) {
-      const items = Object.entries(response.data);
-      self.items = items.map(([key, value]) => {return {key: key, value: value}});
+      self.department_id = response.data.department_id;
+      self.department_name = response.data.department_name;
+      self.id = response.data.id;
+      self.name = response.data.name;
+      self.info = response.data.info;
+
+      // const items = Object.entries(response.data);
+      // self.items = items.map(([key, value]) => {return {key: key, value: value}});
     }).catch(function (error) {
       console.log(error);
       // self.$router.push({ path: '/login' });

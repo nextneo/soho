@@ -35,7 +35,7 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }    
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +43,18 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'status'
+        'full_name',
+        'short_name',
+        'email',
+        'phone',
+        'password',
+        'identity_card',
+        'birth_day',
+        'gender',
+        'face_book',
+        'note',
+        'menuroles',
+        'status',
     ];
 
     /**
@@ -52,7 +63,8 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -67,10 +79,10 @@ class User extends Authenticatable implements JWTSubject
     protected $dates = [
         'deleted_at'
     ];
-    
+
     protected $guard_name = 'api';
 
-    protected $attributes = [ 
+    protected $attributes = [
         'menuroles' => 'user',
     ];
 }

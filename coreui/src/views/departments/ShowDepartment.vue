@@ -6,16 +6,16 @@
           Department id:  {{ $route.params.id }}
         </CCardHeader>
         <CCardBody>
-          <CDataTable 
-            striped 
-            small 
+          <CDataTable
+            striped
+            small
             fixed
-            :items="items" 
+            :items="items"
             :fields="fields">
             <template slot="value" slot-scope="data">
-              <td>{{data.item.value}}</td>              
+              <td>{{data.item.value}}</td>
             </template>
-          </CDataTable>  
+          </CDataTable>
         </CCardBody>
         <CCardFooter>
           <CButton color="secondary" @click="goBack">Back</CButton>

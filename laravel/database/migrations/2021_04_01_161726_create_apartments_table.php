@@ -15,21 +15,38 @@ class CreateApartmentsTable extends Migration
 					->references('id')
 					->on('blocks')
 					->onDelete('cascade');
+			$table->unsignedBigInteger('user_id')->nullable();
+			$table->foreign('user_id')
+					->references('id')
+					->on('users')
+					->onDelete('cascade');
 			$table->string('code',50);
-			$table->integer('floor',)->nullable();
-			$table->string('acreage',)->nullable();
-			$table->integer('total_bedroom',)->nullable();
-			$table->integer('total_toilet',)->nullable();
+			$table->integer('floor')->nullable();;
+			$table->string('acreage')->nullable();;
+			$table->integer('total_bedroom')->nullable();
+			$table->integer('total_toilet')->nullable();
 			$table->string('room_view',50)->nullable();
-			$table->decimal('selling_price',)->nullable();
-			$table->decimal('rental_price',)->nullable();
+			$table->decimal('selling_price',20,0)->nullable();
+			$table->decimal('rental_price',20,0)->nullable();
 			$table->string('status',)->nullable();
-			$table->string('info',100);
+			$table->string('info',100)->nullable();
+
+			$table->longText('image_1')->nullable();
+			$table->longText('image_2')->nullable();
+			$table->longText('image_3')->nullable();
+			$table->longText('image_4')->nullable();
+			$table->longText('image_5')->nullable();
+			$table->longText('image_6')->nullable();
+			$table->longText('image_7')->nullable();
+			$table->longText('image_8')->nullable();
+			$table->longText('image_9')->nullable();
+			$table->longText('image_10')->nullable();
+
 			$table->integer('created_id',)->nullable();
 			$table->integer('updated_id',)->nullable();
 			$table->integer('deleted_id',)->nullable();
 			$table->timestamps();
-			$table->softDeletes();  
+			$table->softDeletes();
         });
     }
 

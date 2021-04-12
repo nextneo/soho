@@ -5,18 +5,30 @@
         <CCardBody>
           <CForm>
             <template slot="header">
-             dsada Edit Department id:  {{ $route.params.id }}
+             Create Department
             </template>
-            <CAlert
-              :show.sync="dismissCountDown"
-              color="primary"
-              fade
-            >
+            <CAlert :show.sync="dismissCountDown" color="primary" fade>
               ({{dismissCountDown}}) {{ message }}
             </CAlert>
-            <CInput type="text" label="Name" placeholder="Name" v-model="name"></CInput>
-            <CInput type="text" label="Block" placeholder="block" v-model="total_block"></CInput>
-            <CInput type="text" label="Floor" placeholder="floor" v-model="total_floor"></CInput>
+            <CRow>
+              <CCol col="12">
+                <CInput type="text" label="Name" placeholder="Name" v-model="name"
+                  :invalid-feedback="typeof errors['name'] === 'undefined' ? '' : errors['name'][0]"
+                  :is-valid="typeof errors['name'] === 'undefined'"></CInput>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="6">
+                <CInput type="number" label="Block" placeholder="block" v-model="total_block"
+                  :invalid-feedback="typeof errors['total_block'] === 'undefined' ? '' : errors['total_block'][0]"
+                  :is-valid="typeof errors['total_block'] === 'undefined'"></CInput>
+              </CCol>
+              <CCol col="6">
+                <CInput type="number" label="Floor" placeholder="floor" v-model="total_floor"
+                  :invalid-feedback="typeof errors['total_floor'] === 'undefined' ? '' : errors['total_floor'][0]"
+                  :is-valid="typeof errors['total_floor'] === 'undefined'"></CInput>
+              </CCol>
+            </CRow>
             <CButton color="info" @click="store()">Save</CButton>
             <CButton color="secondary ml-2" @click="goBack">Back</CButton>
           </CForm>
@@ -38,14 +50,15 @@ export default {
   },
   data: () => {
     return {
-        name: '',
-        total_floor: '',
-        total_block: '',
-        showMessage: false,
-        message: '',
-        dismissSecs: 7,
-        dismissCountDown: 0,
-        showDismissibleAlert: false
+        name                  : '',
+        total_floor           : '',
+        total_block           : '',
+        showMessage           : false,
+        message               : '',
+        dismissSecs           : 7,
+        dismissCountDown      : 0,
+        showDismissibleAlert  : false,
+        errors                : [],
     }
   },
   methods: {
@@ -59,11 +72,16 @@ export default {
           { 'name': self.name , 'total_floor': self.total_floor , 'total_block': self.total_block}
         )
         .then(function (response) {
-            self.name = '';
-            self.total_floor = '';
-            self.total_block = '';
+          if (response.data.status == 'error') {
+            self.errors = response.data.errors;
+          }else{
             self.message = 'Successfully created note.';
             self.showAlert();
+            self.name        = '';
+            self.total_floor = '';
+            self.total_block = '';
+            self.errors      = [];
+          }
         }).catch(function (error) {
             if(error.response.data.message == 'The given data was invalid.'){
               self.message = '';
@@ -75,7 +93,7 @@ export default {
               self.showAlert();
             }else{
               console.log(error);
-              // self.$router.push({ path: 'login' }); 
+              // self.$router.push({ path: 'login' });
             }
         });
     },
@@ -87,7 +105,6 @@ export default {
     },
   },
   mounted: function(){
-    
   }
 }
 

@@ -40,7 +40,7 @@ class UsersAndNotesSeeder extends Seeder
             'role_id' => $userRole->id,
             'hierarchy' => 2,
         ]);
-        $guestRole = Role::create(['name' => 'guest']); 
+        $guestRole = Role::create(['name' => 'guest']);
         RoleHierarchy::create([
             'role_id' => $guestRole->id,
             'hierarchy' => 3,
@@ -68,13 +68,21 @@ class UsersAndNotesSeeder extends Seeder
             'class' => 'warning',
         ]);
         array_push($statusIds, DB::getPdo()->lastInsertId());
-        
+
         /*  insert users   */
-        $user = User::create([ 
-            'name' => 'admin',
+        $user = User::create([
+            'full_name' => 'admin',
+            'short_name' => 'admin',
             'email' => 'admin@admin.com',
+            'phone' => '0123456789',
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'identity_card' => '2221566641',
+            'birth_day' => now(),
+            'gender'    => 2,
+            'face_book' => '',
+            'note'  =>'Note Test',
+            'images' => '',
             'remember_token' => Str::random(10),
             'menuroles' => 'user,admin',
             'status' => 'Active'
@@ -83,13 +91,21 @@ class UsersAndNotesSeeder extends Seeder
         $user->assignRole($roleAdmin);
         for($i = 0; $i<$numberOfUsers; $i++){
             $user = User::create([
-                'name' => $faker->name(),
+                'full_name' => 'Test Core',
+                'short_name' => 'binh dan',
                 'email' => $faker->unique()->safeEmail(),
+                'phone' => '0123456789',
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'identity_card' => '888915221',
+                'birth_day' => now(),
+                'gender'    => 0,
+                'face_book' => '',
+                'note'  =>'Note Test 1',
+                'images' => '',
                 'remember_token' => Str::random(10),
                 'menuroles' => 'user',
-                'status' => $userStatus[ random_int(0,count($userStatus) - 1) ]
+                'status' => 'Active'
             ]);
             $user->assignRole('user');
             array_push($usersIds, $user->id);

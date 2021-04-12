@@ -6,17 +6,20 @@
           User id:  {{ $route.params.id }}
         </CCardHeader>
         <CCardBody>
-          <CDataTable 
-            striped 
-            small 
-            fixed
-            :items="items" 
-            :fields="fields"
-          >
+          <CDataTable striped small fixed :items="items" :fields="fields">         
             <template slot="value" slot-scope="data">
-              <td>{{data.item.value}}</td>              
+              <td>{{data.item.value}}</td>
             </template>
-          </CDataTable>  
+          </CDataTable>
+          <div class="row" v-show="image">
+            <br>
+            <div class="col-sm-4">
+              Image
+            </div>
+            <div class="col-sm-8">
+              <img v-bind:src="image"/>
+          </div>
+        </div>
         </CCardBody>
         <CCardFooter>
           <CButton color="secondary" @click="goBack">Back</CButton>
@@ -33,6 +36,7 @@ export default {
   data: () => {
     return {
       items: [],
+      image: '',
       fields: [
         {key: 'key'},
         {key: 'value'},
@@ -53,7 +57,14 @@ export default {
     let self = this;
     axios.get(  this.$apiAdress + '/api/users/show?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
     .then(function (response) {
-      const items = Object.entries(response.data);
+      const item = Object.entries(response.data);
+      self.image = response.data.images;
+      let items = item.filter(function(i) {
+        if(i[0] != 'images'){
+          return true;
+        }
+        return false;
+      });
       self.items = items.map(([key, value]) => {return {key: key, value: value}});
     }).catch(function (error) {
       console.log(error);

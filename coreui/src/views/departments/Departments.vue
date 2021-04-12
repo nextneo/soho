@@ -8,24 +8,14 @@
         </CCardHeader>
         <CCardBody>
           <CButton color="primary mb-2 mr-2" @click="createDepartment()">Create</CButton>
-          <CButton color="secondary mb-2" @click="showModal()">
-            <CIcon :content="$options.freeSet.cilOptionsHorizontal"/>
-          </CButton>
-
-          <CAlert
-            :show.sync="dismissCountDown"
-            color="primary"
-            fade
-          >
+          <CAlert :show.sync="dismissCountDown" color="primary" fade>
             ({{dismissCountDown}}) {{ message }}
           </CAlert>
           <CDataTable
-            hover
-            striped
+            hover striped column-filter table-filter pagination sorter items-per-page-select
             :items="items"
             :fields="fields"
             :items-per-page="5"
-            pagination
           >
           <template #show="{item}">
             <td>
@@ -122,9 +112,6 @@ export default {
         console.log(error);
         // self.$router.push({ path: '/login' });
       });
-    },
-    showModal(){
-      this.$refs.childComponent.show();
     },
     callBack(id){
       console.log(id);

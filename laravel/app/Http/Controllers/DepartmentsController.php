@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Departments;
+use Validator;
 
 class DepartmentsController extends Controller
 {
@@ -17,6 +18,19 @@ class DepartmentsController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin');
+    }
+    /**
+     * 
+     * getValidator
+     *
+     */
+    protected function getValidator($data)
+    {   
+        return Validator::make($data, [
+            'name'            => ['required', 'max:50'],
+            'total_floor'     => ['required', 'min:1', 'max:99'],
+            'total_block'     => ['required', 'min:1', 'max:99'],
+        ]);
     }
 
     /**
@@ -79,21 +93,22 @@ class DepartmentsController extends Controller
      */
     public function update(Request $request)
     {
-
-        $validatedData = $request->validate([
-            'name'        => 'required|min:1|max:50',
-            'total_floor' => 'min:1|max:99',
-            'total_block' => 'min:1|max:99'
-        ]);
-
-        $id = $request->input('id');
-        $department = Departments::find($id);
-        $department->name        = $request->input('name');
-        $department->total_floor = $request->input('total_floor');
-        $department->total_block = $request->input('total_block');
-        $department->save();
-        //$request->session()->flash('message', 'Successfully updated department');
-        return response()->json( ['status' => 'success'] );
+        $data = $request->all();
+        $validator = $this->getValidator($data);
+        if ($validator->fails()) {
+            return response()->json( [
+                'status' => 'error',
+                'errors' => $validator->getMessageBag()->toArray()]
+            );
+        } else {
+            $id = $request->input('id');
+            $department = Departments::find($id);
+            $department->name        = $request->input('name');
+            $department->total_floor = $request->input('total_floor');
+            $department->total_block = $request->input('total_block');
+            $department->save();
+            return response()->json( ['status' => 'success'] );
+        }
     }
 
     /**
@@ -119,18 +134,20 @@ class DepartmentsController extends Controller
      * @return [type]           [description]
      */
     public function store(Request $request){
-        $validatedData = $request->validate([
-            'name' => 'required|min:1|max:50',
-            'total_floor' => 'min:1|max:99',
-            'total_block' => 'min:1|max:99'
-        ]);
-
-        $department = new Departments();
-        $department->name = $request->input('name');
-        $department->total_floor = $request->input('total_floor');
-        $department->total_block = $request->input('total_block');
-        $department->save();
-
-        return response()->json( array('success' => true) );
+        $data = $request->all();
+        $validator = $this->getValidator($data);
+        if ($validator->fails()) {
+            return response()->json( [
+                'status' => 'error',
+                'errors' => $validator->getMessageBag()->toArray()]
+            );
+        } else {
+            $department = new Departments();
+            $department->name = $request->input('name');
+            $department->total_floor = $request->input('total_floor');
+            $department->total_block = $request->input('total_block');
+            $department->save();
+            return response()->json( array('success' => true) );
+        }
     }
 }

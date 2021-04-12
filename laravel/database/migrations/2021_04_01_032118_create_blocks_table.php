@@ -21,7 +21,7 @@ class CreateBlocksTable extends Migration
                 ->on('departments')
                 ->onDelete('cascade');
             $table->string('name',50);
-            $table->string('info', 100);
+            $table->string('info', 255)->nullable();
             $table->integer('created_id',)->nullable();
             $table->integer('updated_id',)->nullable();
             $table->integer('deleted_id',)->nullable();

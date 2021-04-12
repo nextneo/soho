@@ -30,7 +30,7 @@
                     <CButton type="submit" color="primary" class="px-4">Login</CButton>
                   </CCol>
                   <CCol col="6" class="text-right">
-                    <CButton color="link" class="px-0">Forgot password?</CButton>
+                    <CButton color="link" class="px-0" @click="goForgot()">Forgot password?</CButton>
                   </CCol>
                 </CRow>
               </CForm>
@@ -40,10 +40,9 @@
             color="primary"
             text-color="white"
             class="text-center py-5 d-md-down-none"
-            body-wrapper
-          >
+            body-wrapper>
             <h2>Sign up</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Please register if you do not have login information.</p>
             <CButton
               color="primary"
               class="active mt-3"
@@ -73,6 +72,9 @@ import axios from "axios";
         }
       },
       methods: {
+        goForgot(){
+          this.$router.push({ path: 'forgot' });
+        },
         goRegister(){
           this.$router.push({ path: 'register' });
         },
@@ -93,7 +95,7 @@ import axios from "axios";
             self.showMessage = true;
             console.log(error);
           });
-  
+
         }
       }
     }

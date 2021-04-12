@@ -4,21 +4,34 @@
       <CCard no-header>
         <CCardBody>
           <CForm>
-            <template slot="header">
-              Edit Block id:  {{ $route.params.id }}
-            </template>
-            <CAlert
-              :show.sync="dismissCountDown"
-              color="primary"
-              fade
-            >
-              ({{dismissCountDown}}) {{ message }}
-            </CAlert>
-            <CSelect label="Departments" :value.sync="department_id" :plain="true" :options="departments" disabled="disabled">
-            </CSelect>
-            <CInput type="text" label="Name" placeholder="Name" v-model="name"></CInput>
-            <label for="info">Info</label>
-            <ckeditor v-model="info" id="info" class="mb-2"></ckeditor>
+            <CRow>
+              <CCol col="12">
+                <CAlert :show.sync="dismissCountDown" color="primary" fade>
+                  ({{dismissCountDown}}) {{ message }}
+                </CAlert>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="12">
+                <p>Block ID: {{ $route.params.id }}</p>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="7">
+                <CInput type="text" label="Name" placeholder="Name" v-model="name"
+                  :invalid-feedback="typeof errors['name'] === 'undefined' ? '' : errors['name'][0]"
+                  :is-valid="typeof errors['name'] === 'undefined'"></CInput>
+              </CCol>
+              <CCol col="5">
+                 <CInput type="text" label="Departments" v-model="department_name" disabled="disabled"></CInput>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="12">
+                  <label for="info">Info</label>
+                  <ckeditor v-model="info" id="info" class="mb-2"></ckeditor>
+              </CCol>
+            </CRow>
             <CButton color="info" @click="update()">Save</CButton>
             <CButton color="secondary ml-2" @click="goBack">Back</CButton>
           </CForm>
@@ -43,12 +56,13 @@ export default {
         name                 : '',
         info                 : '',
         department_id        : '',
-        departments          : [],
+        department_name      : '',
         showMessage          : false,
         message              : '',
         dismissSecs          : 7,
         dismissCountDown     : 0,
-        showDismissibleAlert : false
+        showDismissibleAlert : false,
+        errors               : [],
     }
   },
   methods: {
@@ -67,8 +81,13 @@ export default {
           }
         )
         .then(function (response) {
+          if (response.data.status == 'error') {
+            self.errors = response.data.errors;
+          }else{
             self.message = 'Successfully updated Block.';
             self.showAlert();
+            self.errors = [];
+          }
         }).catch(function (error) {
            if(error.response.data.message == 'The given data was invalid.'){
               self.message = '';
@@ -95,14 +114,10 @@ export default {
     let self = this;
     axios.get(  this.$apiAdress + '/api/blocks/edit?token=' + localStorage.getItem("api_token") + '&id=' + self.$route.params.id )
     .then(function (response) {
-        self.name = response.data.block.name;
-        self.info = response.data.block.info;
-        self.department_id = response.data.block.department_id;
-        response.data.departments.forEach(element => {
-          let options = {value: element.id, label: element.name};
-          self.departments.push(options);
-        });
-
+        self.name = response.data.name;
+        self.info = response.data.info;
+        self.department_id = response.data.department_id;
+        self.department_name = response.data.department_name;
     }).catch(function (error) {
         console.log(error);
         // self.$router.push({ path: '/login' });

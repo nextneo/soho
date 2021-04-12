@@ -7,22 +7,16 @@
             Users
         </CCardHeader>
         <CCardBody>
-          <CButton color="primary mb-2" @click="createUser()">Create</CButton>      
-          <CAlert
-            :show.sync="dismissCountDown"
-            color="primary"
-            fade
-          >
+          <CButton color="primary mb-2" @click="createUser()">Create</CButton>
+          <CAlert :show.sync="dismissCountDown" color="primary" fade>
             ({{dismissCountDown}}) {{ message }}
           </CAlert>
           <CDataTable
-            hover
-            striped
+            hover striped column-filter table-filter pagination sorter items-per-page-select
             :items="items"
             :fields="fields"
             :items-per-page="5"
-            pagination
-          >
+            >
           <template #status="{item}">
             <td>
               <CBadge :color="getBadge(item.status)">{{ item.status }}</CBadge>
@@ -48,18 +42,21 @@
       </CCard>
       </transition>
     </CCol>
+    <CCol col="12">
+      <ConfirmDelete ref="ConfirmDeleteComponent" @doDelete="doDelete"></ConfirmDelete>
+    </CCol>
   </CRow>
 </template>
 
 <script>
 import axios from 'axios'
-
+import ConfirmDelete from '../modal/ConfirmDelete.vue'
 export default {
   name: 'Users',
   data: () => {
     return {
       items: [],
-      fields: ['id', 'name', 'registered', 'roles', 'status', 'show', 'edit', 'delete'],
+      fields: ['id', 'full_name', 'short_name', 'registered', 'roles', 'status', 'show', 'edit', 'delete'],
       currentPage: 1,
       perPage: 5,
       totalRows: 0,
@@ -77,6 +74,9 @@ export default {
     previousButtonHtml: 'prev',
     nextButtonHtml: 'next'
   },
+  components: {
+    ConfirmDelete
+  },
   methods: {
     getBadge (status) {
       return status === 'Active' ? 'success'
@@ -84,26 +84,17 @@ export default {
           : status === 'Pending' ? 'warning'
             : status === 'Banned' ? 'danger' : 'primary'
     },
-    showUser ( id ) {
+    showUser (id ) {
       this.$router.push({path: `users/${id.toString()}`});
     },
-    editUser ( id ) {
+    editUser (id ) {
       this.$router.push({path: `users/${id.toString()}/edit`});
     },
     createUser(){
       this.$router.push({path: 'users/create'});
     },
-    deleteUser ( id ) {
-      let self = this;
-      axios.get(  this.$apiAdress + '/api/users/delete?token=' + localStorage.getItem("api_token") + '&id=' + id, {})
-      .then(function (response) {
-          self.message = 'Successfully deleted user.';
-          self.showAlert();
-          self.getUsers();
-      }).catch(function (error) {
-        console.log(error);
-        // self.$router.push({ path: '/login' });
-      });
+    deleteUser (id ) {
+      this.$refs.ConfirmDeleteComponent.show(id);
     },
     countDownChanged (dismissCountDown) {
       this.dismissCountDown = dismissCountDown
@@ -113,10 +104,22 @@ export default {
     },
     getUsers (){
       let self = this;
-      axios.get(  this.$apiAdress + '/api/users?token=' + localStorage.getItem("api_token"))
+      axios.get(this.$apiAdress + '/api/users?token=' + localStorage.getItem("api_token"))
       .then(function (response) {
         self.items = response.data.users;
         self.you = response.data.you;
+      }).catch(function (error) {
+        console.log(error);
+        // self.$router.push({ path: '/login' });
+      });
+    },
+    doDelete(key){
+      let self = this;
+      axios.get(this.$apiAdress + '/api/users/delete?token=' + localStorage.getItem("api_token") + '&id=' + key, {})
+      .then(function (response) {
+          self.message = 'Successfully deleted user.';
+          self.showAlert();
+          self.getUsers();
       }).catch(function (error) {
         console.log(error);
         // self.$router.push({ path: '/login' });

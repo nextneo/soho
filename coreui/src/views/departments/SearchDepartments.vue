@@ -1,5 +1,8 @@
 <template>
-  <CModal title="Departments Search" size="lg" :show.sync="isShow" @update:show="hide" >
+  <CModal title="Departments Search" size="lg"
+    :show.sync="isShow"
+    @update:show="hide"
+    :centered="true">
     <CRow>
       <CCol col="12">
         <transition name="slide">
@@ -10,19 +13,19 @@
             :fields="fields"
             :items-per-page="5"
             pagination
-          >       
+          >
             <template #show="{item}">
               <td>
-                <CButton color="primary" @click="selected( item.id )">Select</CButton>
+                <CButton color="primary" @click="selected( item )">Select</CButton>
               </td>
-            </template>              
+            </template>
           </CDataTable>
         </transition>
       </CCol>
     </CRow>
     <template #footer>
       <CButton color="secondary" @click="hide()">Cancel</CButton>
-    </template>    
+    </template>
   </CModal>
 </template>
 
@@ -30,7 +33,7 @@
 import axios from 'axios'
 
 export default {
-  name: 'Departments',  
+  name: 'Departments',
   data: () => {
     return {
       items: [],
@@ -54,14 +57,14 @@ export default {
     hide(){
       this.isShow = false;
     },
-    selected(id){
-      this.$emit('return', id);
+    selected(item){
+      this.$emit('return', item);
       this.hide();
     },
     getDepartments (){
       let self = this;
-      axios.get(  this.$apiAdress + '/api/departments?token=' + localStorage.getItem("api_token"))            
-      .then(function (response) {        
+      axios.get(  this.$apiAdress + '/api/departments?token=' + localStorage.getItem("api_token"))
+      .then(function (response) {
         self.items = response.data.departments;
       }).catch(function (error) {
         console.log(error);
@@ -69,7 +72,7 @@ export default {
       });
     }
   },
-  mounted: function(){    
+  mounted: function(){
     // this.isShow = this.largeModal;
     this.getDepartments();
   }

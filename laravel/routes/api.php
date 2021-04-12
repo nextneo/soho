@@ -19,12 +19,12 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('register', 'AuthController@register'); 
+    Route::post('register', 'AuthController@register');
 
     Route::resource('notes', 'NotesController');
 
     Route::resource('resource/{table}/resource', 'ResourceController');
-    
+
     Route::group(['middleware' => 'admin'], function ($router) {
 
         Route::resource('mail'        , 'MailController');
@@ -33,44 +33,45 @@ Route::group(['middleware' => 'api'], function ($router) {
 
         Route::resource('bread',  'BreadController');   //create BREAD (resource)
 
-        Route::prefix('users')->group(function () { 
+        Route::prefix('users')->group(function () {
             Route::get('/'        , 'UsersController@index')->name('users.index');
             Route::get('/edit'    , 'UsersController@edit')->name('users.edit');
-            Route::get('/show'    , 'UsersController@show')->name('users.show');            
+            Route::get('/show'    , 'UsersController@show')->name('users.show');
             Route::get('/delete' , 'UsersController@delete')->name('users.delete');
             Route::post('/store'  , 'UsersController@store')->name('users.store');
             Route::post('/update' , 'UsersController@update')->name('users.update');
         });
-        // Route::resource('departments', 'DepartmentsController')->except( ['create'] );
 
-        Route::prefix('departments')->group(function () { 
+        Route::prefix('departments')->group(function () {
             Route::get('/'        , 'DepartmentsController@index')->name('departments.index');
             Route::get('/edit'    , 'DepartmentsController@edit')->name('departments.edit');
-            Route::get('/show'    , 'DepartmentsController@show')->name('departments.show');            
+            Route::get('/show'    , 'DepartmentsController@show')->name('departments.show');
             Route::get('/delete' , 'DepartmentsController@delete')->name('departments.delete');
             Route::post('/store'  , 'DepartmentsController@store')->name('departments.store');
             Route::post('/update' , 'DepartmentsController@update')->name('departments.update');
         });
+
         // blocks
-        Route::prefix('blocks')->group(function () { 
+        Route::prefix('blocks')->group(function () {
             Route::get('/'        , 'BlocksController@index')->name('blocks.index');
             Route::get('/edit'    , 'BlocksController@edit')->name('blocks.edit');
             Route::get('/show'    , 'BlocksController@show')->name('blocks.show');
             Route::get('/delete'  , 'BlocksController@delete')->name('blocks.delete');
             Route::post('/store'  , 'BlocksController@store')->name('blocks.store');
             Route::post('/update' , 'BlocksController@update')->name('blocks.update');
-        });	
-
-		Route::prefix('apartments')->group(function () { 
-            Route::get('/'        , 'ApartmentsController@index')->name('apartments.index');
-            Route::get('/edit'    , 'ApartmentsController@edit')->name('apartments.edit');
-            Route::get('/show'    , 'ApartmentsController@show')->name('apartments.show');            
-            Route::get('/delete' , 'ApartmentsController@delete')->name('apartments.delete');
-            Route::post('/store'  , 'ApartmentsController@store')->name('apartments.store');
-            Route::post('/update' , 'ApartmentsController@update')->name('apartments.update');
         });
 
-        Route::prefix('menu/menu')->group(function () { 
+		Route::prefix('apartments')->group(function () {
+            Route::get('/'        , 'ApartmentsController@index')->name('apartments.index');
+            Route::get('/edit'    , 'ApartmentsController@edit')->name('apartments.edit');
+            Route::get('/show'    , 'ApartmentsController@show')->name('apartments.show');
+            Route::get('/delete'  , 'ApartmentsController@delete')->name('apartments.delete');
+            Route::post('/store'  , 'ApartmentsController@store')->name('apartments.store');
+            Route::post('/update' , 'ApartmentsController@update')->name('apartments.update');
+            Route::get('/search'  , 'ApartmentsController@index')->name('apartments.search');
+        });
+
+        Route::prefix('menu/menu')->group(function () {
             Route::get('/'        , 'MenuEditController@index')->name('menu.menu.index');
             Route::get('/create'  , 'MenuEditController@create')->name('menu.menu.create');
             Route::post('/store'  , 'MenuEditController@store')->name('menu.menu.store');
@@ -78,7 +79,7 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::post('/update' , 'MenuEditController@update')->name('menu.menu.update');
             Route::get('/delete'  , 'MenuEditController@delete')->name('menu.menu.delete');
         });
-        Route::prefix('menu/element')->group(function () { 
+        Route::prefix('menu/element')->group(function () {
             Route::get('/'            , 'MenuElementController@index')->name('menu.index');
             Route::get('/move-up'     , 'MenuElementController@moveUp')->name('menu.up');
             Route::get('/move-down'   , 'MenuElementController@moveDown')->name('menu.down');
@@ -107,6 +108,24 @@ Route::group(['middleware' => 'api'], function ($router) {
             Route::get('/file/copy',        'MediaController@fileCopy')->name('media.file.copy');
 
             Route::get('/file/download',    'MediaController@fileDownload');
+        });
+        // Category
+        Route::prefix('category')->group(function () {
+            Route::get('/'        , 'CategoryController@index')->name('category.index');
+            Route::get('/edit'    , 'CategoryController@edit')->name('category.edit');
+            Route::get('/show'    , 'CategoryController@show')->name('category.show');
+            Route::get('/delete'  , 'CategoryController@delete')->name('category.delete');
+            Route::post('/store'  , 'CategoryController@store')->name('category.store');
+            Route::post('/update' , 'CategoryController@update')->name('category.update');
+        });
+        // News
+        Route::prefix('news')->group(function () {
+            Route::get('/'        , 'NewsController@index')->name('news.index');
+            Route::get('/edit'    , 'NewsController@edit')->name('news.edit');
+            Route::get('/show'    , 'NewsController@show')->name('news.show');
+            Route::get('/delete'  , 'NewsController@delete')->name('news.delete');
+            Route::post('/store'  , 'NewsController@store')->name('news.store');
+            Route::post('/update' , 'NewsController@update')->name('news.update');
         });
 
         Route::resource('roles',        'RolesController');

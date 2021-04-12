@@ -4,29 +4,58 @@
       <CCard no-header>
         <CCardBody>
           <CForm>
-            <template slot="header">
-             Edit Block id:  {{ $route.params.id }}
-            </template>
-            <CAlert :show.sync="dismissCountDown" color="primary" fade>
-              ({{dismissCountDown}}) {{ message }}
-            </CAlert>
-             <CSelect label="Departments" :value.sync="department_id" :plain="true" :options="departments">
-            </CSelect>
-            <CInput type="text" label="Name" placeholder="Name" v-model="name"></CInput>
-            <CInput type="text" label="Info" placeholder="Info" v-model="info"></CInput>
+            <CRow>
+              <CCol col="12">
+                <CAlert :show.sync="dismissCountDown" color="primary" fade>
+                  ({{dismissCountDown}}) {{ message }}
+                </CAlert>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="12">
+                <p>Create Block</p>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="7">
+                <CInput type="text" label="Name" placeholder="Name" v-model="name"
+                  :invalid-feedback="invalidFeedback('name')"
+                  :is-valid="isValid('name')"></CInput>
+              </CCol>
+              <CCol col="5">
+                <CInput type="text" placeholder="Department" autocomplete="Department" label="Department" v-model="department_name" disabled="disabled"
+                  :invalid-feedback="invalidFeedback('department_id')"
+                  :is-valid="isValid('department_id')">
+                  <template #append>
+                    <CButton color="success" class="btn-sm" @click="showModal()"><CIcon name="cil-magnifying-glass"/></CButton>
+                  </template>
+                </CInput>
+              </CCol>
+            </CRow>
+            <CRow>
+              <CCol col="12">
+                  <label for="info">Info</label>
+                  <ckeditor v-model="info" id="info" class="mb-2"></ckeditor>
+              </CCol>
+            </CRow>
             <CButton color="info" @click="store()">Save</CButton>
             <CButton color="secondary ml-2" @click="goBack">Back</CButton>
           </CForm>
         </CCardBody>
       </CCard>
     </CCol>
+    <CCol col="12">
+      <SearchDepartments ref="childComponent" @return="callBack"></SearchDepartments>
+    </CCol>
   </CRow>
 </template>
 
 <script>
 import axios from 'axios'
+import SearchDepartments from '../departments/SearchDepartments.vue'
+
 export default {
-  name: 'EditBlock',
+  name: 'CreateBlock',
   props: {
     caption: {
       type: String,
@@ -38,15 +67,29 @@ export default {
         name                 : '',
         info                 : '',
         department_id        : '',
-        departments          : [],
+        department_name      : '',
         showMessage          : false,
         message              : '',
         dismissSecs          : 7,
         dismissCountDown     : 0,
-        showDismissibleAlert : false
+        showDismissibleAlert : false,
+        errors               : [],
     }
   },
+  components: {
+    SearchDepartments
+  },
   methods: {
+    invalidFeedback(field){
+      return typeof this.errors[field] === 'undefined' ? '' : this.errors[field][0];
+    },
+    isValid(field){
+      if (this.errors.length == 0) {
+        return null;
+      }
+
+      return typeof this.errors[field] === 'undefined';
+    },
     goBack() {
       this.$router.go(-1)
       // this.$router.replace({path: '/Blocks'})
@@ -57,25 +100,20 @@ export default {
           { 'name': self.name , 'info': self.info, 'department_id': self.department_id }
         )
         .then(function (response) {
+          if (response.data.status == 'error') {
+            self.errors = response.data.errors;
+          }else{
             self.message     = 'Successfully created block.';
             self.showAlert();
-            self.name        = '';
-            self.info        = '';
-            department_id    = '';
-            departments      = self.departments;
+
+            self.name       = '';
+            self.info       = '';
+            department_id   = '';
+            department_name = '';
+            self.errors     = [];
+          }
         }).catch(function (error) {
-            if(error.response.data.message == 'The given data was invalid.'){
-              self.message = '';
-              for (let key in error.response.data.errors) {
-                if (error.response.data.errors.hasOwnProperty(key)) {
-                  self.message += error.response.data.errors[key][0] + '  ';
-                }
-              }
-              self.showAlert();
-            }else{
-              console.log(error);
-              // self.$router.push({ path: 'login' }); 
-            }
+
         });
     },
     countDownChanged (dismissCountDown) {
@@ -84,22 +122,18 @@ export default {
     showAlert () {
       this.dismissCountDown = this.dismissSecs
     },
+    showModal(){
+      this.$refs.childComponent.show();
+    },
+    callBack(item){
+      if(item != null){
+        this.department_id = item.id;
+        this.department_name = item.name;
+      }
+    },
   },
   mounted: function(){
-    let self = this;
-    axios.get(  this.$apiAdress + '/api/blocks/edit?token=' + localStorage.getItem("api_token") + '&id=' + '' )    
-    .then(function (response) {
-        response.data.departments.forEach(element => {
-          let options = {value: element.id, label: element.name};
-          self.departments.push(options);
-        });
-        if(response.data.departments.length > 0){
-          self.department_id = response.data.departments[response.data.departments.length - 1].id;
-        }        
-    }).catch(function (error) {
-        console.log(error);
-        // self.$router.push({ path: '/login' });
-    });
+
   }
 }
 </script>

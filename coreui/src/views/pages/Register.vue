@@ -44,7 +44,7 @@
                 <CButton type="submit" color="success" block>Create Account</CButton>
               </CForm>
             </CCardBody>
-            <CCardFooter class="p-4">
+            <!-- <CCardFooter class="p-4">
               <CRow>
                 <CCol col="6">
                   <CButton block color="facebook">
@@ -57,7 +57,7 @@
                   </CButton>
                 </CCol>
               </CRow>
-            </CCardFooter>
+            </CCardFooter> -->
           </CCard>
         </CCol>
       </CRow>
@@ -75,7 +75,7 @@
           password: '',
           password_confirmation: ''
         }
-      },    
+      },
       methods: {
         register() {
           var self = this;
@@ -95,9 +95,9 @@
           .catch(function (error) {
             console.log(error);
           });
-  
+
         }
       }
     }
-  
+
   </script>
